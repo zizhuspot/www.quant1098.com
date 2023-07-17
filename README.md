@@ -8,7 +8,9 @@
 
 ## 新增文章
 
-1. 在`source/_posts`目录下新建一个`markdown`文件，文件名格式为`英文标题.md`，例如`Hello-World.md`。
+> 这里保存之后就会发布到网站，所以建议在 mdnice 写好之后再上传。
+
+1. 在`source/_posts`目录下新建一个`markdown`文件，文件名格式为`英文标题.md`，例如`hello-world.md`。
 2. 在`markdown`文件头部添加如下内容：
 
 ```md
@@ -23,8 +25,6 @@ categories:
 description: 描述
 cover: 封面图片（可选）
 ---
-
-<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7029815294762181" data-ad-slot="6412968057" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 ```
 
 ## 新增友链
