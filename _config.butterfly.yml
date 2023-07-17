@@ -34,7 +34,7 @@ code_word_wrap: true
 # formal:
 #   icon: link || the description || color
 social:
-  fab fa-github: https://github.com/zizhuspot || Github || '#24292e'
+  fab fa-github: https://github.com/zizhuspot/caoyuan || Github || '#24292e'
   fas fa-envelope: mailto:luozhu2021@gmail.com || Email || '#4a7dbe'
   fab fa-twitter: https://twitter.com/luozhu2021 || Twitter || '#00acee'
 
@@ -166,7 +166,7 @@ toc:
 post_copyright:
   enable: true
   decode: false
-  author_href: https://github.com/zizhuspot
+  author_href: https://github.com/zizhuspot/caoyuan
   license: CC BY-NC-SA 4.0
   license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
