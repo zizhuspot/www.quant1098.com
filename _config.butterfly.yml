@@ -239,7 +239,7 @@ aside:
       enable: true
       icon: fab fa-github
       text: Follow Me
-      link: https://github.com/zizhuspot
+      link: https://github.com/zizhuspot/caoyuan
   card_announcement:
     enable: true
     content: A simple and elegant blog
