@@ -88,13 +88,11 @@ cover:
   # left/right/both
   position: both
   # When cover is not set, the default cover is displayed (當沒有設置cover時，默認的封面顯示)
-  default_cover:
-    - https://cdn.pixabay.com/photo/2023/02/08/15/10/sculpture-7776861_1280.jpg
-    - https://cdn.pixabay.com/photo/2023/02/06/16/46/sea-7772372_1280.jpg
-    - https://cdn.pixabay.com/photo/2023/02/07/14/45/snow-7774312_1280.jpg
-    - https://cdn.pixabay.com/photo/2023/02/06/01/14/superb-fairywren-7770904_1280.jpg
-    - https://cdn.pixabay.com/photo/2023/02/04/07/50/flower-7766608_1280.jpg
-    - https://cdn.pixabay.com/photo/2023/02/04/07/38/cherry-blossoms-7766588_1280.jpg
+  default_cover
+    - https://s2.loli.net/2023/07/17/9JQuLefqURI7DYi.png
+    - https://s2.loli.net/2023/07/17/qkCs3dgYblAB7ar.png
+    - https://s2.loli.net/2023/07/17/XvsoykKqNSQbBUj.png
+    - https://s2.loli.net/2023/07/17/mnMagitJQlyNfHk.png
     - https://cdn.pixabay.com/photo/2023/02/04/07/38/cherry-blossoms-7766587_1280.jpg
     - https://cdn.pixabay.com/photo/2023/02/04/07/50/daisy-7766609_1280.jpg
     - https://cdn.pixabay.com/photo/2023/01/14/19/50/flower-7718952_1280.jpg
