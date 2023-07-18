@@ -79,19 +79,17 @@ AGIX-ADA：已包括（需要[钱包链接](http://mywallets.singularitynet.io/)
 
 为了参与活动，用户需要完成 KYC/AML 流程，在 KYC 开放时社交媒体将分享链接，希望参加者可以在下面找到相关详细信息。
 
-新KYC申请人：
+新 KYC 申请人：
 
-<img src="https://s2.loli.net/2023/07/06/PnHF4RajYlqBUQJ.jpg" style="display:block; margin:0 auto;" />
+![](https://s2.loli.net/2023/07/06/PnHF4RajYlqBUQJ.jpg)
 
 现有KYC申请人：
 
-<img src="https://s2.loli.net/2023/07/06/EdHyzViBRAwaGP6.jpg" style="display:block; margin:0 auto;" />
+![](https://s2.loli.net/2023/07/06/EdHyzViBRAwaGP6.jpg)
 
-在KYC结束后48小时内，并在活动完成之前的任何时间内，将拍摄快照以确保参与者不会移动其SDAO或AGIX。
+在 KYC 结束后 48 小时内，并在活动完成之前的任何时间内，将拍摄快照以确保参与者不会移动其 SDAO 或 AGIX。
 
-如果您在KYC或Launchpad活动期间需要任何帮助，请使用以下“ SophiaVerse - KYC故障排除 ”Telegram频道。
-
-## !!安全提醒!!
+## 安全提醒
 
 永远不要回复任何私人信息，社区管理员永远不会直接私信您或打电话给您。永远不要分享您的种子短语或单击未知链接。永远不要直接向合约地址发送代币，它们无法恢复并将丢失，请始终使用适当的dApp操作与启动平台进行交互。
 
@@ -123,4 +121,4 @@ AGIX-ADA：已包括（需要[钱包链接](http://mywallets.singularitynet.io/)
 - **7月22日**：快照结束
 - **7月25日12:00 UTC**：代币认领开放
 
-SophiaVerse 的完整细节，包括代币经济模型和分配，将由 SophiaVerse 发布，请务必关注他们的 [Twitter](https://twitter.com/sophiaverse)，[Discord](http://discord.gg/sophiaverse)，[Medium](https://medium.com/sophiaverse)和 **Telegram**频道。
+SophiaVerse 的完整细节，包括代币经济模型和分配，将由 SophiaVerse 发布，请务必关注他们的 [Twitter](https://twitter.com/sophiaverse)，[Discord](http://discord.gg/sophiaverse)，[Medium](https://medium.com/sophiaverse)和 Telegram 频道。
