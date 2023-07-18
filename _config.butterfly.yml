@@ -604,8 +604,8 @@ ad:
 # --------------------------------------
 
 site_verification:
-  # - name: google-site-verification
-  #   content: xxxxxx
+  - name: google-site-verification
+    content: EUv0zYikOwxgZ9MYHarjFVpEvso58OuH2RXxb-WDVO4
   # - name: baidu-site-verification
   #   content: xxxxxxx
 
