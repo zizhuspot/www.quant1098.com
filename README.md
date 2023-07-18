@@ -17,11 +17,11 @@
 ---
 title: 标题
 date: 发布时间（格式：2023-07-17 20:00:00）
+categories:
+  - 类别
 tags:
   - 标签1
   - 标签2
-categories:
-  - 类别
 description: 描述
 cover: 封面图片（可选）
 ---
