@@ -36,7 +36,7 @@ code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
   - googled29fba422c357ff8.html
-  - baidu_verify_codeva-JKuJ0p6yeq.html
+  - baidu_verify_codeva-mcMpG8PbMp.html
 
 # Writing
 new_post_name: :title.md # File name of new posts
