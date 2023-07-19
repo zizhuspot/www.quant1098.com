@@ -64,6 +64,14 @@ card_announcement:
   content: A simple and elegant blog
 ```
 
+社交信息修改也是在 `_config.butterfly.yml` 文件中修改：
+
+```yml
+social:
+  fas fa-envelope: mailto:luozhu2021@gmail.com || Email || '#4a7dbe'
+  fab fa-twitter: https://twitter.com/luozhu2021 || Twitter || '#00acee'
+```
+
 ## 更换图片
 
 默认的头图和封面图可能不适合你，这些都在 `_config.butterfly.yml` 文件中：
@@ -96,21 +104,3 @@ cover:
     - https://s2.loli.net/2023/07/17/tjNbDh17cTQiJMB.png
     - https://s2.loli.net/2023/07/17/eS6iXfpscLyUhVC.png
 ```
-
-## 本地运行
-
-> 推荐 github 在线编辑，如果你本来就会用 git，那可以尝试本地运行。
-
-```sh
-# 克隆仓库
-$ git clone https://github.com/zizhuspot/caoyuan.git
-# 安装依赖
-$ yarn install
-# 运行
-$ yarn server
-```
-
-## 学习资源
-
-- [GitHub 快速入门](https://docs.github.com/zh/get-started/quickstart)
-- [猴子都能看懂的GIT入门](https://backlog.com/git-tutorial/cn/)
