@@ -109,3 +109,8 @@ $ yarn install
 # 运行
 $ yarn server
 ```
+
+## 学习资源
+
+- [GitHub 快速入门](https://docs.github.com/zh/get-started/quickstart)
+- [猴子都能看懂的GIT入门](https://backlog.com/git-tutorial/cn/)
