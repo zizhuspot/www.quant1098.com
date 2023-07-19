@@ -96,3 +96,16 @@ cover:
     - https://s2.loli.net/2023/07/17/tjNbDh17cTQiJMB.png
     - https://s2.loli.net/2023/07/17/eS6iXfpscLyUhVC.png
 ```
+
+## 本地运行
+
+> 推荐 github 在线编辑，如果你本来就会用 git，那可以尝试本地运行。
+
+```sh
+# 克隆仓库
+$ git clone https://github.com/zizhuspot/caoyuan.git
+# 安装依赖
+$ yarn install
+# 运行
+$ yarn server
+```
