@@ -111,7 +111,7 @@ cover:
 
 ```sh
 # 克隆仓库
-$ git clone https://github.com/zizhuspot/<%= name %>.git
+$ git clone https://github.com/zizhuspot/caoyuan.git
 # 安装依赖
 $ yarn install
 # 运行
