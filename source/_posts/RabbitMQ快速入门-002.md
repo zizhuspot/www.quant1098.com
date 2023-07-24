@@ -90,10 +90,12 @@ rabbitmqctl status
 
 ![2023-07-23_072700.png](https://s2.loli.net/2023/07/23/RTLsSZYNmoiXEnD.png)
 
-1. ```shell
+1. 设置权限
+   ```shell
    rabbitmqctl set_permissions -p / developer ".*" ".*" ".*"
    ```
-   ![2023-07-23_072944.png](https://s2.loli.net/2023/07/23/QtNvsz1nfW6aVPC.png)
+   ![](https://s2.loli.net/2023/07/23/QtNvsz1nfW6aVPC.png)
+   
 
 2. 查看(指定vhostpath)所有用户的权限
 
