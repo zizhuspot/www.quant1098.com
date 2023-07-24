@@ -15,7 +15,6 @@ description: 'RabbitMQ是一个非常流行的开源消息中间件,可以在大
 cover: https://s2.loli.net/2023/07/24/1UNflTcoBgWEzC6.webp
 ---
 
-## 二 RabbitMQ用户管理,角色管理及权限设置
 
 因为RabbitMQ是使用docker安装的 因此需要先进入docker环境内的RabbitMQ
 
@@ -28,9 +27,9 @@ rabbitmqctl status
 
 ![2023-07-23_070848.png](https://s2.loli.net/2023/07/23/dHYSOjvsRTq5faM.png)
 
-#### 一 用户管理
+## 一 用户管理
 
-1. ##### 查看用户列表
+1. ### 查看用户列表
 
    ```shell
    rabbitmqctl list_users
@@ -38,7 +37,7 @@ rabbitmqctl status
 
    ![2023-07-23_071011.png](https://s2.loli.net/2023/07/23/h1J4agofqscKIPH.png)
 
-2. ##### 新建用户
+2. ### 新建用户
 
    ```shell
    rabbitmqctl add_user developer 456789
@@ -46,7 +45,7 @@ rabbitmqctl status
 
    ![2023-07-23_071316.png](https://s2.loli.net/2023/07/23/3gVyCc76uRDOT8s.png)
 
-3. ##### 删除用户
+3. ### 删除用户
 
    ```shell
    rabbitmqctl delete_user developer
@@ -54,7 +53,7 @@ rabbitmqctl status
 
    ![2023-07-23_071444.png](https://s2.loli.net/2023/07/23/s6FTgW58u7jAHPx.png)
 
-4. ##### 修改密码
+4. ### 修改密码
 
    ```shell
    rabbitmqctl change_password developer developer123456
@@ -64,7 +63,7 @@ rabbitmqctl status
 
 ‍
 
-#### 二 角色设置
+## 二 角色设置
 
 1. RabbitMQ中主要有administrator，monitoring，policymaker，management，impersonator,none几种角色。
 
@@ -85,7 +84,7 @@ rabbitmqctl status
 
 ​       
 
-#### 三 权限配置
+## 三 权限配置
 
 现在这个developer账号并没有管理configure, write , read的权限 我们需要加上他
 
