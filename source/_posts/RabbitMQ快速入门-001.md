@@ -15,9 +15,8 @@ description: 'RabbitMQ是一个非常流行的开源消息中间件,可以在大
 cover: https://s2.loli.net/2023/07/24/1UNflTcoBgWEzC6.webp
 ---
 
-# docker 安装使用 RabbitMQ
 
-#### 一 安装docker
+## 一 安装docker
 
 1. 检查内核 
 
@@ -57,7 +56,7 @@ cover: https://s2.loli.net/2023/07/24/1UNflTcoBgWEzC6.webp
     docker version
     ```
 
-#### 二 安装RabbitMQ
+## 二 安装RabbitMQ
 
 1. 使用docker 安装rabbitmq
 
