@@ -15,7 +15,7 @@ cover: https://s2.loli.net/2023/07/24/kLHNvzpIYK5SU2h.webp
 
 ## screen命令基本用法
 
--  启动一个screen会话:
+- 启动一个screen会话:
 
 ```bash
 screen
@@ -85,4 +85,3 @@ screen -L -S sessionname
 ```
 screen -r -L sessionname
 ```
-

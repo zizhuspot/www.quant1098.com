@@ -25,27 +25,27 @@ pd.set_option('expand_frame_repr', False)  # 当列太多时不换行
 
 ```python
 df = pd.read_csv(
-        # 该参数为数据在电脑中的路径
-        filepath_or_buffer='BITFINEX_BTCUSD_20180124_1T.csv',
-        # 该参数代表数据的分隔符，csv文件默认是逗号。其他常见的是'\t'
-        sep=',',
-        # 该参数代表跳过数据文件的的第1行不读入
-        skiprows=1,
-        # nrows，只读取前n行数据，若不指定，读入全部的数据
-        nrows=15,
-        # 将指定列的数据识别为日期格式。若不指定，时间数据将会以字符串形式读入。一开始先不用。
-        parse_dates=['candle_begin_time'],
-        # 将指定列设置为index。若不指定，index默认为0, 1, 2, 3, 4...
-        index_col=['candle_begin_time'],
-        # 读取指定的这几列数据，其他数据不读取。若不指定，读入全部列
-        # usecols=['candle_begin_time', 'close'],
-        # 当某行数据有问题时，报错。设定为False时即不报错，直接跳过该行。当数据比较脏乱的时候用这个。
-        # error_bad_lines=False,
-        # 将数据中的null识别为空值
-        # na_values='NULL',
+    # 该参数为数据在电脑中的路径
+    filepath_or_buffer='BITFINEX_BTCUSD_20180124_1T.csv',
+    # 该参数代表数据的分隔符，csv文件默认是逗号。其他常见的是'\t'
+    sep=',',
+    # 该参数代表跳过数据文件的的第1行不读入
+    skiprows=1,
+    # nrows，只读取前n行数据，若不指定，读入全部的数据
+    nrows=15,
+    # 将指定列的数据识别为日期格式。若不指定，时间数据将会以字符串形式读入。一开始先不用。
+    parse_dates=['candle_begin_time'],
+    # 将指定列设置为index。若不指定，index默认为0, 1, 2, 3, 4...
+    index_col=['candle_begin_time'],
+    # 读取指定的这几列数据，其他数据不读取。若不指定，读入全部列
+    # usecols=['candle_begin_time', 'close'],
+    # 当某行数据有问题时，报错。设定为False时即不报错，直接跳过该行。当数据比较脏乱的时候用这个。
+    # error_bad_lines=False,
+    # 将数据中的null识别为空值
+    # na_values='NULL',
 
-        # 更多其他参数，请直接搜索"pandas read_csv"，要去逐个查看一下。比较重要的，header等
-    )
+    # 更多其他参数，请直接搜索"pandas read_csv"，要去逐个查看一下。比较重要的，header等
+)
 ```
 
 ![](https://s2.loli.net/2023/07/22/PBgx5VXL3QSaquh.png)
@@ -330,6 +330,3 @@ df.to_csv('output.csv', index=False)
 哪里可以看到全部的函数？
 
 http://pandas.pydata.org/pandas-docs/stable/api.html 
-
-
-
