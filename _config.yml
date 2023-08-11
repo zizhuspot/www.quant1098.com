@@ -19,7 +19,7 @@ timezone: Asia/Hong_Kong
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://caoyuan.netlify.app
+url: https://www.quant1098.com/
 permalink: :hash/
 permalink_defaults:
 pretty_urls:
