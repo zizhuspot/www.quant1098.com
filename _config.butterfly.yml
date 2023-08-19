@@ -34,7 +34,7 @@ code_word_wrap: true
 # formal:
 #   icon: link || the description || color
 social:
-  fab fa-github: https://github.com/zizhuspot/caoyuan || Github || '#24292e'
+  fab fa-github: https://github.com/zizhuspot/www.quant1098.com || Github || '#24292e'
   fas fa-envelope: mailto:luozhu2021@gmail.com || Email || '#4a7dbe'
   fab fa-twitter: https://twitter.com/luozhu2021 || Twitter || '#00acee'
 
@@ -166,7 +166,7 @@ toc:
 post_copyright:
   enable: true
   decode: false
-  author_href: https://github.com/zizhuspot/caoyuan
+  author_href: https://github.com/zizhuspot/www.quant1098.com
   license: CC BY-NC-SA 4.0
   license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
@@ -184,7 +184,7 @@ post_edit:
   enable: true
   # url: https://github.com/user-name/repo-name/edit/branch-name/subdirectory-name/
   # For example: https://github.com/jerryc127/butterfly.js.org/edit/main/source/
-  url: https://github.com/zizhuspot/caoyuan/edit/main/source/
+  url: https://github.com/zizhuspot/www.quant1098.com/edit/main/source/
 
 # Related Articles
 related_post:
@@ -237,7 +237,7 @@ aside:
       enable: true
       icon: fab fa-github
       text: Follow Me
-      link: https://github.com/zizhuspot/caoyuan
+      link: https://github.com/zizhuspot/www.quant1098.com
   card_announcement:
     enable: true
     content: A simple and elegant blog
@@ -591,14 +591,14 @@ google_adsense:
   enable: true
   auto_ads: true
   js: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js
-  client: ca-pub-7029815294762181
+  client: ca-pub-7179361798925104
   enable_page_level_ads: true
 
 # Insert ads manually (手動插入廣告)
 ad:
-  # index: <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7029815294762181" data-ad-slot="6412968057" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  # aside: <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7029815294762181" data-ad-slot="9692865372" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  # post: <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-7029815294762181"data-ad-slot="4521975302"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  # index: <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-ea-2g+h9+m-mx" data-ad-client="ca-pub-7179361798925104" data-ad-slot="5962952391"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  # aside: <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7179361798925104" data-ad-slot="7212454886" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  # post: <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-7179361798925104" data-ad-slot="5352578302"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
 # Verification (站長驗證)
 # --------------------------------------
