@@ -63,29 +63,30 @@ sudo apt-get install php7.4-fpm php7.4-mbstring php7.4-mysql php7.4-curl php7.4-
 
 ### 修改配置文件
 
-1. ```bash
-    sudo vim /etc/nginx/nginx.conf
-    
-    index index.html index.htm; 改为 
-    index index.php index.html index.htm;
-    ```
-2. ```bash
-    #location ~ \.php$ {
-            #       include snippets/fastcgi-php.conf;
-            #
-            #       # With php5-cgi alone:
-            #       fastcgi_pass 127.0.0.1:9000;
-            #       # With php5-fpm:
-            #       fastcgi_pass unix:/var/run/php5-fpm.sock;
-            #} 改为
-    ```
+```bash
+sudo vim /etc/nginx/nginx.conf
 
-    ```bash
-    location ~ \.php$ {
-                   include snippets/fastcgi-php.conf;
-                   fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
-            }
-    ```
+index index.html index.htm; 改为 
+index index.php index.html index.htm;
+```
+
+```bash
+#location ~ \.php$ {
+        #       include snippets/fastcgi-php.conf;
+        #
+        #       # With php5-cgi alone:
+        #       fastcgi_pass 127.0.0.1:9000;
+        #       # With php5-fpm:
+        #       fastcgi_pass unix:/var/run/php5-fpm.sock;
+        #} 改为
+```
+
+```bash
+location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+        }
+```
 
 ### NGINX重新加载配置
 
@@ -109,5 +110,3 @@ sudo systemctl reload nginx
  # 重启fpm服务
  sudo service php7.4-fpm restart
 ```
-
-‍

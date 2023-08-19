@@ -48,7 +48,6 @@ if (!fs.existsSync("accounts.json")) {
     "You've already generated 100 accounts, are you sure to generate a new one?\nIf you want please delete accounts.json, and remember to backup the mnemonic first⚠️!!!"
   )
 }
-
 ```
 
 ##  脚本使用
@@ -64,7 +63,6 @@ node utils/generateWallets    生成n个钱包+助记词
 import blocksmith
 import random
 import pandas as pd
-
 
 def get_eth():
     num = random.sample("abcdefghijklmnopqretuvwxyzABCDEFGHIJKLOMOPQRSTUVWXYZ$%^$@%^&*@^(%rs0123456789!", 50)
