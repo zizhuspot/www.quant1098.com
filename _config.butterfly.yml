@@ -591,14 +591,14 @@ google_adsense:
   enable: true
   auto_ads: true
   js: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js
-  client: ca-pub-7179361798925104
+  client: ca-pub-7962287588031867
   enable_page_level_ads: true
 
 # Insert ads manually (手動插入廣告)
 ad:
-  # index: <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-ea-2g+h9+m-mx" data-ad-client="ca-pub-7179361798925104" data-ad-slot="5962952391"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  # aside: <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7179361798925104" data-ad-slot="7212454886" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  # post: <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-7179361798925104" data-ad-slot="5352578302"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  index: <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-7962287588031867" data-ad-slot="7586987656"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+  aside: <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7962287588031867" data-ad-slot="1257383027" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script>
+  post: <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-7962287588031867" data-ad-slot="2412882052"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
 # Verification (站長驗證)
 # --------------------------------------
