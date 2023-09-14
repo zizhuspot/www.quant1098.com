@@ -1,5 +1,5 @@
 ---
-title: aioquant的msql模块
+title: aioquant的异步MySQL模块
 date: 2023-09-14 16:07:00
 categories:
   - aioquant
