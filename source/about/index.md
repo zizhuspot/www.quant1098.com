@@ -1,24 +1,25 @@
 ---
-title: 关于
+title: About
 date: 2023-07-16 15:54:03
 ---
-## 我是谁
 
-你好，我是草原。我是一名python程序员，热爱编程, 美食, 量化交易。我在这里分享我的经验和见解，也希望能够与更多人交流和学习。
+## Who am I
 
-## 我的经历
+Hi, I'm 草原. I'm a python programmer with a passion for programming, food, and quantitative trading. I'm here to share my experience and insights and hope to connect and learn from as many people as possible.
 
-在每一个领域深耕，总会遇到一些人，遇到一些事。这些人，这些事会让我们觉得就这么随风散去太过于可惜，就这样吧。在一个静静的角落,留一些痕迹。期待有缘人的到来,得到你的所需。也让这些人，这些事留在更多人的记忆里。
+## My experience
 
-## 我的使命
+When you are deep in every field, you will always meet some people and encounter some things. These people, these things will make us feel that it is too much of a pity to be dispersed with the wind, so be it. In a quiet corner, leave some traces. Looking forward to the arrival of a person of destiny, get what you need. Also let these people, these things in the memory of more people.
 
-我相信人生而自由。我相信知识只有扩散出去才有价值。这是我们每个人都应该追求的。我的使命是通过我的工作和生活方式来实现这些价值观，并帮助更多的人找到自己的使命和价值。
+## My mission
 
-## 联系我
+I believe that people are born free. I believe that knowledge has value only when it is diffused. This is what we should all strive for. My mission is to realize these values through my work and lifestyle, and to help more people find their own mission and values.
 
-如果您有任何问题或建议，请随时与我联系。您可以通过以下方式找到我：
+## Contact Me
 
-- 电子邮件：zqwuming@gmail.com
-- 社交媒体：[Twitter](https://twitter.com/coyun59793260)
+If you have any questions or suggestions, please feel free to contact me. You can find me in the following ways:
 
-感谢您访问我的网站！
+- Email: zqwuming@gmail.com
+- Social Media: [Twitter](https://twitter.com/coyun59793260)
+
+Thank you for visiting my website!
