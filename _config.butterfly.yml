@@ -172,11 +172,11 @@ post_copyright:
 
 # Sponsor/reward
 reward:
-  enable: true
+  enable: false
   QR_code:
-    - img: https://cdn.jsdelivr.net/gh/youngjuning/images/wechat.png
+    - img:
       # link:
-      text: 微信打赏
+      # text: 微信打赏
 
 # Post edit
 # Easily browse and edit blog source code online.
