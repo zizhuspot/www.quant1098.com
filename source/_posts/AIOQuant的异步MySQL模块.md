@@ -1,57 +1,56 @@
 ---
-title: AIOQuant的异步MySQL模块
+title: AIOQuant's asynchronous MySQL module
 date: 2023-09-14 16:07:00
 categories:
-  - aioquant
+  - AIOQuant
 tags:
-  - 数字货币
-  - 股票
-  - 量化工具
-  - 狂飙
+  - Digital currency
+  - Stock
+  - Quantitative tool
+  - Kuangbiao
   - digiccy
   - quant1098.com
   - trade
-  - aioquant
-description: 'aioquant是一个异步的量化框架，交易员可以在上面进行高频量化交易'
+  - AIOQuant
+description: 'aioquant is an asynchronous quantitative framework where traders can conduct high frequency quantitative trading'
 cover: https://s2.loli.net/2023/09/14/ewZtRvLqoH7F8Up.jpg
 ---
 
-## 关于AIOQuant
+## Introduction to AIOQuant
 
 ### 简介
 
-`AIOQuant` 是一套使用 `Python` 语言开发的 `异步事件驱动` 的 `量化交易` / `做市` 系统，它被设计为适应中高频策略的交易系统， 底层封装了操作系统的 `aio*库` 实现异步事件循环，业务层封装了 `RabbitMQ消息队列` 实现异步事件驱动，再加上 `Python` 语言的简单易用， 它非常适用于数字货币的高频策略和做市策略开发。
+`AIOQuant` is a set of `asynchronous event-driven` `quantitative trading` / `market making` system developed using `Python` language. It is designed to accommodate high-frequency trading strategies with its `aio* libraries` implementing asynchronous event loops at the lower level and `RabbitMQ message queues` enabling asynchronous event-driven at the business layer, plus the simplicity of `Python` language. It is well suited for developing high-frequency strategies and market making strategies for digital currencies. 
 
-`AIOQuant` 同时也被设计为一套完全解耦的量化交易系统，其主要模块包括 `行情系统模块`、`资产系统模块`、`交易系统模块`、`风控系统模块`、`存储系统模块`， 各个模块都可以任意拆卸和组合使用，甚至采用不同的开发语言设计重构，模块之间通过 `RabbitMQ消息队列` 相互驱动，所以不同模块还可以部署在不同的进程， 或不同服务器。
+`AIOQuant` is also designed as a fully decoupled quantitative trading system, with main modules including `market data module`, `asset module`, `trading module`, `risk control module`, `storage module`. Each module can be detached and combined freely, or even redesigned and refactored using different languages. The modules interact with each other via `RabbitMQ message queues`, so they can even be deployed across different processes or servers.
 
-### 功能
 
-`AIOQuant` 提供了简单而强大的功能：
 
-- 基于 [Python Asyncio](https://docs.python.org/3/library/asyncio.html) 原生异步事件循环，处理更简洁，效率更高；
-- 跨平台（Windows、Mac、Linux），可任意私有化部署；
-- 任意交易所的交易方式（现货、合约）统一，相同策略只需要区别不同配置，即可无缝切换任意交易所；
-- 所有交易所的行情统一，并通过事件订阅的形式，回调触发策略执行不同指令；
-- 支持任意多个策略协同运行；
-- 支持任意多个策略分布式运行；
-- 毫秒级延迟（10毫秒内，一般瓶颈在网络延迟）；
-- 提供任务、监控、存储、事件发布等一系列高级功能；
-- 定制化Docker容器，分布式配置、部署运行；
-- 量化交易Web管理系统，通过管理工具，轻松实现对策略、风控、资产、服务器等进程或资源的动态管理；
+`AIOQuant` provides simple yet powerful functionalities:
+- Based on native Python Asyncio asynchronous event loop, processing is more concise and efficient.
+-  Cross-platform (Windows, Mac, Linux), can be privately deployed. 
+-   Unified trading methods (spot, futures) for any exchange. The same strategy only needs different configurations to seamlessly switch between exchanges.
+-    Unified market data for all exchanges, triggering strategies to execute different orders through event subscription and callbacks.
+-    Support running arbitrary number of strategies simultaneously. 
+-    Support distributed running of arbitrary number of strategies.
+-    Millisecond level latency (within 10ms, bottleneck is usually network latency).
+-    Provide tasks, monitoring, storage, event publishing and other advanced functionalities. 
+-    Customized Docker container, distributed configuration and deployment.
+-    Quantitative trading web management system, enabling dynamic management of strategies, risk control, assets, servers and other processes or resources easily through the management tool. 
 
-## 关于MySQL异步模块
+## **About the MySQL Asynchronous Module**
 
-本身AIOQuant 数据库支持是mongo数据库 一个文档型的数据库，但是mysql毕竟用的人比较多，还有一些低频数据存MySQL问题也不大，所以添加了 MySQL模块支持，方便调用，为了统一格式，采用了跟mongo数据库统一的调用模式，即在init_mysql函数里面初始化连接池，然后由一个mysql类MySQLBase进行方法实现，同时每个函数加上装饰器来解决报错问题。增强代码的健壮性。
+AIOQuant's database support is based on MongoDB, which is a  document-oriented database. However, MySQL is more widely used, and  using it for some low-frequency data storage is reasonable. Therefore, a MySQL module was added to support easy access. To unify the format, the MySQL module initializes a connection pool in  init_mysql like MongoDB, and implements methods through a MySQLBase  class. Each function is decorated to handle errors robustly.This enhances the code's resilience while providing a consistent interface  between MongoDB and MySQL. The asynchronous MySQL module improves  integration and leverages MySQL's popularity, while maintaining  AIOQuant's asynchronous event-driven architecture. 
 
-## 相关代码
+## Related Code
 
-创建异步的MySQL链接需要使用异步`mysql`库 `aiomysql`， 因此 第一步需要安装这个库：
+Creating an asynchronous MySQL link requires the use of the asynchronous `mysql` library `aiomysql`, so the first step is to install this library:
 
 ```shell
 pip install aiomysql
 ```
 
-然后使用初始化函数进行链接：
+Then use the initialization function to link:
 
 ```python
 async def init_mysql(host, port, user, password, database, max_conn_time=3, max_reconn_tries=3):
@@ -72,7 +71,7 @@ async def init_mysql(host, port, user, password, database, max_conn_time=3, max_
         logger.info('MySQL reconnected!')
 ```
 
-还有需要写一个装饰器，来解决网络环境报错问题：
+There's also a decorator that needs to be written to solve the problem of reporting errors in a networked environment:
 
 ```python
 def exceptions_handled(func):
@@ -88,7 +87,7 @@ def exceptions_handled(func):
     return wrapper
 ```
 
-然后需要在类开始的时候引入连接池，和设置自动关闭链接
+Then you need to introduce connection pooling at the beginning of the class, and set up automatic link closure
 
 ```python
 def __init__(self):
@@ -99,7 +98,7 @@ def __aexit__(self, exc_type, exc_val, exc_tb):
     self.pool.wait_closed()
 ```
 
-再然后 创立`select`函数和`execute`函数 来处理一些常规必须操作，比如建立链接，接收返回结果之类的。
+Then the `select` and `execute` functions are created to handle the usual must-have operations, such as creating links, receiving results, and so on.
 
 ```python
 # 执行select函数
@@ -127,7 +126,7 @@ async def execute(self, sql, args=None):
         return affetced
 ```
 
-最后的工作就变得异常简单，比如创建表得函数 长这样
+The final work becomes very simple, for example, the function that creates the table looks like this
 
 ```python
 @exceptions_handled
@@ -138,17 +137,17 @@ async def create_table(self, table_name, sql=None):
     return True, None
 ```
 
-可以看到 实际代码就只有三行。当然 sql语句长这样子
+As you can see, there are only three lines of actual code. Of course, the sql statement looks like this
 
 ```python
 sql = """create table {} (id int(8) AUTO_INCREMENT, time Datetime COMMENT '时间', open decimal(10,8) COMMENT '开盘价', high decimal(10,8) COMMENT '最高价', low decimal(10,8) COMMENT '最低价', close decimal(10,8) COMMENT '收盘价', volume DOUBLE COMMENT '计价货币交易量/基础货币交易量', quote_base_asset_volume DOUBLE COMMENT '成交量', num_of_trades INT COMMENT '交易次数', Taker_buy_base_asset_volume DOUBLE COMMENT 'Taker买入的基础资产量', Taker_buy_quote_asset_volume DOUBLE COMMENT 'Taker买入的计价资产量', PRIMARY KEY (id))"""
 ```
 
-看起来比较乱 其实如果对齐得话，也不是特别难以识别，长这样子：
+It looks a bit messy. Actually, it's not particularly hard to recognize if it's aligned properly, it looks like this:
 
 ![2023-09-14_161438.png](https://s2.loli.net/2023/09/14/qml2CRMDc9dU3Ab.png)
 
-返回数据库表名列表的函数， 跟传统的同步库代码写起来没什么不同
+The function that returns a list of database table names is written in the same way as traditional synchronization library code.
 
 ```python
 @exceptions_handled
@@ -164,7 +163,7 @@ async def get_table_names(self):
         return None, None
 ```
 
-插入数据函数 长这样
+The insert function looks like this.
 
 ```python
     @exceptions_handled
@@ -177,7 +176,7 @@ async def get_table_names(self):
         return True, Non
 ```
 
-这些普通的函数就不多说了，有一个插入DataFrame格式数据写的算长的， 也不过30行代码，其余的太短没啥可说的
+These ordinary functions do not say much, there is an insert DataFrame format data written to count the long, but only 30 lines of code, the rest is too short not much to say!
 
 ```python
 @exceptions_handled
@@ -214,7 +213,7 @@ async def update_data_by_df(self, table_name, df):
     return True, None
 ```
 
-执行sql语句的通用函数
+Generic functions for executing sql statements
 
 ```python
 @exceptions_handled
@@ -228,14 +227,14 @@ async def query_data(self, table_name, columns, condition=''):
     return result, None
 ```
 
-剩下的就不多说了， 自己添加各种方法就好了
+I won't tell you the rest. Just add your own methods.
 
 
 
-## 结束语
+## Conclusion
 
-在`aioquant`这个高性能的异步框架上添加`MySQL`库是一件意义不算太大的事情，因为已经有`mongo`库默认启用，觉得性能不够还可以用时序数据库`InfluxDB` 和`Kdb+` 	全看你自己的个人需要。如果能力和金钱够就用快的时序数据库，如果是回测分析 那么通用的`MySQL`也不是不行。毕竟我们是来钓鱼的，不是来当钓鱼仙人，专业给鱼喂饭的。
+Adding a `MySQL` library to `aioquant`, a high-performance asynchronous framework, is not a big deal, since the `mongo` library is already enabled by default, and you can use the temporal databases `InfluxDB` and `Kdb+` if you feel that the performance is not enough for you to use them, it all depends on your own personal needs. If you have enough power and money, you can use a fast temporal database, and if you are analyzing backtests, then a general-purpose `MySQL` is not out of the question. After all, we are here to fish, not to be a fishing immortal, specialized in feeding the fish.
 
-另外， 这个函数还是有些不足，欢迎浏览讨论。
+Besides, this function is still a bit insufficient, so feel free to browse and discuss.
 
 ![](https://s2.loli.net/2023/09/14/aiTGmv57fjJLZdh.webp)
