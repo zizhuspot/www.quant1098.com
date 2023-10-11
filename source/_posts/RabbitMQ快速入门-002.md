@@ -1,128 +1,132 @@
 ---
-title: RabbitMQ快速入门(二) --- 二 RabbitMQ用户管理,角色管理及权限设置
+title: RabbitMQ Quick Start (II) --- II RabbitMQ User Management, Role Management and Permission Setting
 date: 2023-07-23 08:26:00
 categories:
-  - 基础设施
-tags:
+  - Infrastructure
+tags: 
   - RabbitMQ
-  - 消息队列
-  - 入门
-  - 用户管理
-  - 基础知识
-  - 角色管理
-  - 权限设置
-description: 'RabbitMQ是一个非常流行的开源消息中间件,可以在大多数分布式系统中找到它的身影。它具有可靠、灵活、易用等优点,是构建异步处理和事件驱动架构的重要选择。 全文包括以下内容一docker安装RabbitMQ 二 RabbitMQ用户管理,角色管理及权限设置 三 如何保证消息99.99%被发送成功？四 如何通过持久化保证消息99.99%不丢失? 五 如何保证队列里的消息99.99%被消费'
+  - Message Queues
+  - Getting Started
+  - User Management
+  - Basics
+  - Role Management
+  - Privilege settings
+description: RabbitMQ is a very popular open source messaging middleware , you can find it in most distributed systems . It is reliable, flexible, easy to use and other advantages, is an important choice for building asynchronous processing and event-driven architecture. The full text includes the following content a docker installation of RabbitMQ RabbitMQ user management, role management and permission settings three How to ensure that 99.99% of the message was sent successfully? How to ensure that 99.99% of messages are not lost through persistence? V How to ensure that 99.99% of messages in the queue are consumed?
 cover: https://s2.loli.net/2023/07/24/1UNflTcoBgWEzC6.webp
 ---
 
+## II RabbitMQ User Management, Role Management and Permission Setting
 
-因为RabbitMQ是使用docker安装的 因此需要先进入docker环境内的RabbitMQ
+Because RabbitMQ is installed using docker, you need to enter RabbitMQ in the docker environment first.
 
 ```shell
-# 进入docker环境
-sudo docker exec -it [容器名 ps.rabbitmq] /bin/bash
-# 查看运行状态
+# Enter the docker environment
+sudo docker exec -it [container name ps.rabbitmq] /bin/bash
+# Check the status
 rabbitmqctl status
 ```
 
 ![2023-07-23_070848.png](https://s2.loli.net/2023/07/23/dHYSOjvsRTq5faM.png)
 
-## 用户管理
+#### 一 user management
 
-1、查看用户列表
+1. ##### View User List
 
-```shell
-rabbitmqctl list_users
-```
+   ```shell
+   rabbitmqctl list_users
+   ```
 
-![2023-07-23_071011.png](https://s2.loli.net/2023/07/23/h1J4agofqscKIPH.png)
+   ![2023-07-23_071011.png](https://s2.loli.net/2023/07/23/h1J4agofqscKIPH.png)
 
-2、新建用户
+2. ##### New User
 
-```shell
-rabbitmqctl add_user developer 456789
-```
+   ```shell
+   rabbitmqctl add_user developer 456789
+   ```
 
-![2023-07-23_071316.png](https://s2.loli.net/2023/07/23/3gVyCc76uRDOT8s.png)
+   ![2023-07-23_071316.png](https://s2.loli.net/2023/07/23/3gVyCc76uRDOT8s.png)
 
-3、删除用户
+3. ##### delete user
 
-```shell
-rabbitmqctl delete_user developer
-```
+   ```shell
+   rabbitmqctl delete_user developer
+   ```
 
-![2023-07-23_071444.png](https://s2.loli.net/2023/07/23/s6FTgW58u7jAHPx.png)
+   ![2023-07-23_071444.png](https://s2.loli.net/2023/07/23/s6FTgW58u7jAHPx.png)
 
-4、修改密码
+4. ##### chagne password
 
-```shell
-rabbitmqctl change_password developer developer123456
-```
+   ```shell
+   rabbitmqctl change_password developer developer123456
+   ```
 
-![2023-07-23_071701.png](https://s2.loli.net/2023/07/23/qz1QIem2J4Avyjp.png)
+   ![2023-07-23_071701.png](https://s2.loli.net/2023/07/23/qz1QIem2J4Avyjp.png)
 
-## 角色设置
+‍
 
-RabbitMQ中主要有administrator，monitoring，policymaker，management，impersonator,none几种角色。
+#### 二 characterization
 
-默认的用户guest是administrator角色，新建的developer用户没有设置角色，即为none，如果我们想把developer用户设置为administrator角色
+1. In RabbitMQ, there are several roles: administrator, monitoring, policymaker, management, impersonator, and none.
 
-```shell
-rabbitmqctl set_user_tags developer administrator
-```
+   The default user guest is in the administrator role, and the new developer user has no role set, i.e., none, if we want to set the developer user to the administrator role
 
-![2023-07-23_071855.png](https://s2.loli.net/2023/07/23/sovTtn8EAhJc1ZH.png)
+1. 
 
-也可以给用户设置多个角色，如给用户developer设置administrator，monitoring：
+   ```shell
+   rabbitmqctl set_user_tags developer administrator
+   ```
+   
+   ![2023-07-23_071855.png](https://s2.loli.net/2023/07/23/sovTtn8EAhJc1ZH.png)
 
-```shell
-rabbitmqctl set_user_tags developer administrator monitoring
-```
-![2023-07-23_072002.png](https://s2.loli.net/2023/07/23/sAXQuOeCZln73tV.png)
+   It is also possible to set multiple roles for a user, such as administrator, monitoring for the user developer:
 
-## 权限配置
-
-现在这个developer账号并没有管理configure, write , read的权限 我们需要加上他
-
-![2023-07-23_072700.png](https://s2.loli.net/2023/07/23/RTLsSZYNmoiXEnD.png)
-
-1、设置权限
-
-```shell
-rabbitmqctl set_permissions -p / developer ".*" ".*" ".*"
-```
-![](https://s2.loli.net/2023/07/23/QtNvsz1nfW6aVPC.png)
+   ```shell
+   rabbitmqctl set_user_tags developer administrator monitoring
+   ```
+   ![2023-07-23_072002.png](https://s2.loli.net/2023/07/23/sAXQuOeCZln73tV.png)
 
 
-2、查看(指定vhostpath)所有用户的权限
 
-```shell
-rabbitmqctl  list_permissions
-```
+#### III Privilege Configuration
 
-![2023-07-23_072820.png](https://s2.loli.net/2023/07/23/Ap27rHsjGg3JTYq.png)
+Now this developer account doesn't have the privileges to manage configure, write, and read, so we need to add them.
 
-查看virtual host为/的所有用户权限
+![](https://s2.loli.net/2023/07/23/RTLsSZYNmoiXEnD.png)
 
-```shell
-rabbitmqctl  list_permissions -p /
-```
-![2023-07-23_073120.png](https://s2.loli.net/2023/07/23/Q1bDua9AlNk25Ci.png)
+1. Setting Up Permissions
+   ```shell
+   rabbitmqctl set_permissions -p / developer ".*" ".*" ".*"
+   ```
+   ![](https://s2.loli.net/2023/07/23/QtNvsz1nfW6aVPC.png)
+   
+2. View the permissions of all users on the specified vhostpath.
 
-3、查看指定用户的权限
+   ```shell
+   rabbitmqctl  list_permissions
+   ```
 
-```shell
-rabbitmqctl  list_user_permissions developer
-```
+   ![](https://s2.loli.net/2023/07/23/Ap27rHsjGg3JTYq.png)
 
-![2023-07-23_073300.png](https://s2.loli.net/2023/07/23/AXtdCHklR8V1GEr.png)
+   View all user permissions for virtual host as /
 
-4、清除用户权限
+   ```shell
+   rabbitmqctl  list_permissions -p /
+   ```
+   ![](https://s2.loli.net/2023/07/23/Q1bDua9AlNk25Ci.png)
 
-```shell
-rabbitmqctl  clear_permissions developer
-```
+3. To view the privileges of a specified user
 
-![2023-07-23_073404.png](https://s2.loli.net/2023/07/23/8X2uJSwUBET1Ay3.png)
+   ```shell
+   rabbitmqctl  list_user_permissions developer
+   ```
+   ![2023-07-23_073300.png](https://s2.loli.net/2023/07/23/AXtdCHklR8V1GEr.png)
 
-参考 ： https://www.cnblogs.com/ericli-ericli/p/5902270.html
+4. Clearing User Privileges
+
+   ```shell
+   rabbitmqctl  clear_permissions developer
+   ```
+   ![2023-07-23_073404.png](https://s2.loli.net/2023/07/23/8X2uJSwUBET1Ay3.png)
+
+consultation ： https://www.cnblogs.com/ericli-ericli/p/5902270.html
+
