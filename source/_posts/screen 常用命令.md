@@ -1,87 +1,88 @@
 ---
-title: screen 命令相关
+title: screen Command Related
 date: 2023-07-23 22:41:00
 categories:
   - Linux
-tags:
+tags: 
   - screen
   - Linux
-  - 终端多窗口
-  - 会话
-  - 高级用法
-description: 'screen是一个非常强大的终端多窗口工具,可以实现在一个终端内同时连接多个终端会话。'
+  - Terminal Multi-Window
+  - Sessions
+  - Advanced Usage
+description: screen is a very powerful terminal multi-window utility that allows you to connect to multiple terminal sessions in a single terminal at the same time.
 cover: https://s2.loli.net/2023/07/24/kLHNvzpIYK5SU2h.webp
 ---
 
-## screen命令基本用法
+## Basic screen command usage
 
-- 启动一个screen会话:
+-  Start a screen session.
 
 ```bash
 screen
 ```
 
-- 退出screen会话:ctrl + a + d- 查看当前所有的screen会话:
+- Exit a screen session: ctrl + a + d- View all current screen sessions.
 
 ```bash
 screen -ls
 ```
 
-- 重新连接一个screen会话:
+- Reconnecting a screen session.
 
 ```bash
 screen -r sessionid
 ```
 
-- 强制重新连接一个screen会话:
+- Force reconnection of a screen session.
 
 ```bash
 screen -dr sessionid
 ```
 
-## screen会话管理
+## Screen session management
 
-- 创建一个命名的screen会话:
+- Creates a named screen session:
 
 ```bash
 screen -S sessionname
 ```
 
-- 在一个screen会话中创建一个新的窗口:ctrl + a + c - 在screen窗口间切换:ctrl + a + 窗口编号- 暂时断开一个screen会话:ctrl + a + d- 杀死一个screen会话:
+- Create a new window in a screen session: ctrl + a + c - Switch between screen windows: ctrl + a + window number - Temporarily disconnect a screen session: ctrl + a + d - Kill a screen session.
 
 ```bash
 screen -X -S sessionid quit
 ```
 
-- 杀死所有断开的screen会话:
+- Kill all disconnected screen sessions.
 
 ```
 screen -wipe
 ```
 
-## screen高级用法
+## Advanced Screen Usage
 
-- 监控一个进程:
+- Monitor a process.
 
 ```bash
 screen -dmS sessionname command
 ```
 
-- 同时启动多个screen会话:
+- Start multiple screen sessions at the same time.
 
 ```
 screen -d -m -S session1 command1
 screen -d -m -S session2 command2
 ```
 
-- 录制screen会话:
+- Record a screen session.
 
 ```
 screen -L -S sessionname
 ```
 
-- 播放recorded会话:
+- Play Recorded Sessions.
 
 ```
 screen -r -L sessionname
 ```
+
