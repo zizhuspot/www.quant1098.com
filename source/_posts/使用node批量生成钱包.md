@@ -1,19 +1,19 @@
 ---
-title: 使用node.js批量生成钱包
+title: Batch Wallet Generation with node.js
 date: 2023-07-23 23:19:00
 categories:
   - Linux
-tags:
+tags: 
   - node.js
-  - Linux
-  - 钱包
+  - node.js
   - wallet
-  - 批量
-description: '使用node.js批量生成钱包是我目前所知的最好用的批量生成钱包的方法'
+  - wallet
+  - batch
+description: 'Using node.js to batch generate wallets is the best way to batch generate wallets that I know of'
 cover: https://s2.loli.net/2023/07/24/lyTcN5xXsu2wbzP.webp
 ---
 
-## node.js生成钱包代码
+## node.js generate wallet code
 
 ```js
 import { ethers } from "ethers"
@@ -48,21 +48,23 @@ if (!fs.existsSync("accounts.json")) {
     "You've already generated 100 accounts, are you sure to generate a new one?\nIf you want please delete accounts.json, and remember to backup the mnemonic first⚠️!!!"
   )
 }
+
 ```
 
-##  脚本使用
+##  Script Usage
 
 ```js
-npm install  # node环境安装
-node utils/generateWallets    生成n个钱包+助记词
+npm install  # node environment installation
+node utils/generateWallets    Generate n wallets + mnemonics
 ```
 
-## python生成钱包代码
+## python generate wallet code
 
 ```python
 import blocksmith
 import random
 import pandas as pd
+
 
 def get_eth():
     num = random.sample("abcdefghijklmnopqretuvwxyzABCDEFGHIJKLOMOPQRSTUVWXYZ$%^$@%^&*@^(%rs0123456789!", 50)
@@ -81,7 +83,7 @@ def get_eth():
 
 
 data = []
-count = 1  # 生成地址数量
+count = 1  # of addresses generated
 for i in range(1, count + 1):
     key, checksum_address = get_eth()
     data.append([checksum_address, key])
@@ -91,14 +93,14 @@ df = pd.DataFrame(data=data, columns=['地址', '私钥'])
 df.to_csv("eth.csv", index=False, encoding="utf_8_sig")
 ```
 
-## python版本生成器的使用说明
+## Instructions for python version generator
 
-安装好需要的库之后，直接运行，运行结果保留在csv文件中， 总体来说 不如node.js的生成钱包代码更优雅。node.js 的代码效率也更高，同时可以直接用助记词保存。大大方便了用户。
+After installing the required libraries, run it directly, and the result is kept in the csv file. Overall It is not as elegant as the generated wallet code of node.js. The code of node.js is also more efficient, and at the same time, it can be saved directly with auxiliary words. This is very convenient for users.
 
-## 注意事项
+## Notes
 
-对于助记词、私钥的保管我这里需要强调一下。千万不能存储到网络上，本子记下来藏好。如果是大批量的私钥，你可以加密存储，也可以拆分分别存储。千万别把完整的私钥、助记词放在网上。网盘、云笔记、iCloud等等地方被盗的太多太多。
+I need to emphasize the storage of mnemonic and private key. Never store them on the network, write them down and hide them. If it is a large number of private keys, you can encrypt the storage, you can also split the separate storage. Never put the complete private key, mnemonic on the internet. Too many of them are stolen from places like Netflix, Cloud Notes, iCloud, and so on.
 
-除了存储，我们平常最好用代码操作，复制私钥、助记词不要完整复制，剩下一部分手打上去，养成这样的习惯。
+In addition to storage, we usually best to use the code operation, copy the private key, mnemonic words do not complete copy, the remaining part of the hand-typed up, to develop such a habit.
 
-一定一定要养成上面的两种好习惯，只要本金不丢永远都可以赚钱，本金没了再赚可谓是难上加难！
+Must must develop the above two good habits, as long as the principal is not lost can always make money, the principal is gone and then earn can be difficult!
