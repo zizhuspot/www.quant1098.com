@@ -1,335 +1,337 @@
 ---
-title: python 5分钟快速入门
+title: python 5 minute quickstart
 date: 2023-07-22 09:25:00
 categories:
-  - 量化交易
-tags:
-  - 量化交易
+  - Quantitative Trading
+tags: Quantitative trading
+  - Quantitative Trading
   - python
-  - 入门
-  - 快速
-  - 基础知识
-  - 5分钟
-description: '本文不适合对于python语言没有基础的朋友, 适合有语言基础或者用过一段时间python语言但是有些语法有些模糊的朋友,你可以把这个文档当作备忘,随时查阅一些模糊的或者记忆不太扎实的地方'
+  - Getting Started
+  - Quick Start
+  - Basics
+  - 5 minutes
+description: 'This document is not suitable for those who do not have a basic knowledge of python, it is suitable for those who have a basic knowledge of the language or have used python for some time but some of the syntax is a bit fuzzy, you can use this document as a memo, you can always refer to some of the fuzzy or not too solid to memorize the place '
 cover: https://s2.loli.net/2023/07/24/7YKgcPjuiUDeRoL.webp
 ---
 
-## 简介
+## Introduction
 
-本文只是一个简单的语法堆积介绍,不适合对于编程没有基础的朋友,适合有语言基础或者用过一段时间python语言但是有些语法有些模糊的朋友,你可以把这个文档当作备忘,随时查阅一些模糊的或者记忆不太扎实的地方。
+This document is just a simple introduction to syntax stacking, not for those who have no basic knowledge of programming, but for those who have a basic knowledge of the language or have been using python for a while but some of the syntax is a bit vague, you can use this document as a reminder to refer to some of the ambiguities or not too solid in memory.
 
-同样, 本文也不准备在编程语言环境的安装和编辑器的安装和设置花费时间,  默认这些问题你都有能力解决掉,或者已经解决掉了。
+Similarly, this article is not going to spend time on installing the programming language environment or installing and setting up the editor, as you will be able to solve these problems by default, or have already done so.
 
-本文案列使用python3 语言, 大部分示例python2可用,少数不行语句python语言已经不再支持或者说更改了更优雅的写法。
+This article is written in python3, most of the examples are available in python2, and the few statements that don't work are no longer supported by the language or have been changed to a more elegant way of writing them.
 
-下面正式开始~
+Let's get started.
 
-## 注释和打印输出
+## Annotations and printouts
 
 ```python
-# 单行注释
+# Single-line comments
 
 """ 
-多行字符串可以用
-    三个引号包裹，不过这也可以被当做
-    多行注释
+Multi-line strings can be wrapped in
+    three quotes, but this can also be treated as a
+    multi-line comment
 """
-# 打印输出
-print("hello world!") # =>  输出hello world! 
+# print("hello world!") # => output hello world!
+print("hello world!") # => output hello world! 
 ```
 
-## 数据类型和操作符
+## Data types and operators
 
-### 一 数字类型和相关操作
+### I Number types and related operations
 
 ```python
-# 数字类型
-4  # => 4
+# Number types
+4 # => 4
 
-# 简单的算数
-1 + 2  # => 3
-8 - 2  # => 6
-10 * 3  # => 30
-35 / 7  # => 5
+# Simple arithmetic
+1 + 2 # => 3
+8 - 2 # => 6
+10 * 3 # => 30
+35 / 7 # => 5
 
-# 整数的除法会自动取整
-5 / 3  # => 1
+# Division of integers is automatically rounded
+5 / 3 # => 1
 
-# 要做精确的除法，我们需要引入浮点数
-3.0     # 浮点数
-13.0 / 4.0  # => 3.25 精确多了
+# To do exact division, we need to introduce floating point numbers
+3.0 # Floating point numbers
+13.0 / 4.0 # => 3.25 Much more precise.
 
-# 括号具有最高优先级
-(1 + 4) * 2  # => 10
+# Parentheses have the highest priority
+(1 + 4) * 2 # => 10
 ```
 
-### 二 布尔值数据类型
+### II Boolean data types
 
 ```python
 True
 False
 
-# 用 not 来取非
-not True  # => False
-not False  # => True
+# Use not to fetch nots
+not True # => False
+not False # => True
 
-# 相等
-2 == 2  # => True
-3 == 1  # => False
+# Equal
+2 == 2 # => True
+3 == 1 # => False
 
-# 不等
-4 != 4  # => False
-5 != 6  # => True
+# Not equal
+4 ! 4 ! == 4 # => False
+5 ! = 6 # => True
 
-# 更多的比较操作符
-1 < 12  # => True
+# More comparison operators
+1 < 12 # => True
 1 > 9 # => False
-4 <= 4  # => True
-6 >= 6  # => True
+4 <= 4 # => True
+6 >= 6 # => True
 
-# 比较运算可以连起来写！
-2 <3 < 4  # => True
-3 < 4 < 3  # => False
+# Comparison operations can be written concatenated!
+2 < 3 < 4 # => True
+3 < 4 < 3 # => False
 ```
 
-## 字符串类型和运算
+## String types and operations
 
 ```python
-# 字符串需要通过 " 或 ' 括起来
+# The string needs to be enclosed in " or '
 "Hello world!"
 'Hello world!'
 
-# 字符串通过加号拼接
-"Hello " + "world!"  # => "Hello world!"
+# String is enclosed in a plus sign
+"Hello " + "world!" # => "Hello world!"
 
-# 字符串可以被视为字符的列表
-"Hello world!"[0]  # => 'H'
+# String can be treated as a list of characters
+"Hello world!"[0] # => 'H'
 
-# % 可以用来格式化字符串
+# % can be used to format strings
 "%s can be %s" % ("Hello", "world!")
 
-# 也可以用 format 方法来格式化字符串
-# 推荐使用这个方法
+# Strings can also be formatted using the format method.
+# It is recommended to use this method
 "{0} can be {1}".format("strings", "formatted")
-# 也可以用变量名代替数字
+# You can also replace numbers with variable names
 "{name} wants to eat {food}".format(name="Bob", food="lasagna")
 
-# 现在更常使用的方法时加上f参数
+# The method now more commonly used with the f argument
 name, food = "Bob", "lasagna"
 f"{name} wants to eat {food}"
 
-# None 是对象
-None  # => None
+# None is an object
+None # => None
 
-# 不要用相等 `==` 符号来和None进行比较
-# 要用 `is`
-"etc" is None  # => False
-None is None  # => True
+# Don't use the equality `==` symbol to compare with None.
+# Use `is`.
+"etc" is None # => False
+None is None # => True
 
-# 'is' 可以用来比较对象的相等性
-# 这个操作符在比较原始数据时没多少用，但是比较对象时必不可少
+# 'is' can be used to compare objects for equality
+# This operator is not very useful for comparing raw data, but is essential for comparing objects.
 
-# None, 0, 和空字符串都被算作 False
-# 其他的均为 True
-0 == False  # => True
-"" == False  # => True
+# None, 0, and the empty string are counted as False
+# Everything else is True
+0 == False # => True
+"" == False # => True
 ```
 
-## 变量和集合
+## Variables and collections
 
-集合主要包含列表list  字典dict 和 tuple元组,至于在机器学习方面用到的数组, 因为在python量化中基本都是用pandas的DataFarmes数据结构, 所以数组可以暂时忽略掉。
+Collections are mainly lists, lists, dictionaries, dicts and tuples. As for arrays, which are used in machine learning, they can be ignored for the time being because they are basically pandas DataFarmes data structures in python quantization.
 
-### 一 变量
+### I Variable
 
 ```python
-# 给变量赋值前不需要事先声明
-some_var = 5    # 一般建议使用小写字母和下划线组合来做为变量名
-some_var  # => 5
+# There is no need to declare a variable before assigning it a value.
+some_var = 5 # It is generally recommended to use a combination of lowercase letters and underscores for variable names.
+some_var # => 5
 
-# 访问未赋值的变量会抛出异常
-# 可以查看控制流程一节来了解如何异常处理
-some_other_var  # 抛出 NameError
+# An exception is thrown when accessing an unassigned variable.
+# See the section on control flow to see how exceptions are handled.
+some_other_var # throws NameError
 
-# if 语句可以作为表达式来使用
-"yahoo!" if 3 > 2 else 2  # => "yahoo!"
+# The if statement can be used as an expression
+"yahoo!" if 3 > 2 else 2 # => "yahoo!"
 ```
 
 
 
-### 二  列表相关操作
+### II List Related Operations
 
 ```python
-# 列表用来保存序列
+# A list is used to hold sequences
 li = []
-# 可以直接初始化列表
+# Lists can be initialized directly
 other_li = [4, 5, 6]
 
-# 在列表末尾添加元素
-li.append(1)    # li 现在是 [1]
-li.append(2)    # li 现在是 [1, 2]
-li.append(4)    # li 现在是 [1, 2, 4]
-li.append(3)    # li 现在是 [1, 2, 4, 3]
-# 移除列表末尾元素
-li.pop()        # => 3 li 现在是 [1, 2, 4]
-# 重新加进去
-li.append(3)    # li is now [1, 2, 4, 3] again.
+# Add elements to the end of the list
+li.append(1) # li is now [1]
+li.append(2) # li now is [1, 2]
+li.append(4) # li now is [1, 2, 4]
+li.append(3) # li now is [1, 2, 4, 3]
+# Remove the end of the list
+li.pop() # => 3 li is now [1, 2, 4]
+# Add it back in
+li.append(3) # li is now [1, 2, 4, 3] again.
 
-# 像其他语言访问数组一样访问列表
-li[0]  # => 1
-# 访问最后一个元素
-li[-1]  # => 3
+# Access the list as you would an array in any other language.
+li[0] # => 1
+# Access the last element
+li[-1] # => 3
 
-# 越界会抛出异常
-li[4]  # 抛出越界异常
+# Throw an exception for out-of-bounds.
+li[4] # throws an out-of-bounds exception
 
-# 切片语法需要用到列表的索引访问
-# 可以看做数学之中左闭右开区间
-li[1:3]  # => [2, 4]
-# 省略开头的元素
-li[2:]  # => [4, 3]
-# 省略末尾的元素
-li[:3]  # => [1, 2, 4]
+# Slicing syntax requires indexed access to lists.
+# Think of it as left-closed-right-open intervals in math
+li[1:3] # => [2, 4]
+# Omit the first element
+li[2:] # => [4, 3]
+# Omit the last element
+li[:3] # => [1, 2, 4]
 
-# 删除特定元素
-del li[2]  # li 现在是 [1, 2, 3]
+# Delete specific elements
+del li[2] # li is now [1, 2, 3]
 
-# 合并列表
-li + other_li  # => [1, 2, 3, 4, 5, 6] - 并不会不改变这两个列表
+# Merge the lists
+li + other_li # => [1, 2, 3, 4, 5, 6] - doesn't leave the two lists unchanged
 
-# 通过拼接来合并列表
-li.extend(other_li)  # li 是 [1, 2, 3, 4, 5, 6]
+# Merge the lists by splicing
+li.extend(other_li) # li is [1, 2, 3, 4, 5, 6]
 
-# 用 in 来返回元素是否在列表中
-1 in li  # => True
+# Use in to return whether an element is in the list or not
+1 in li # => True
 
-# 返回列表长度
-len(li)  # => 6
+# Returns the length of the list
+len(li) # => 6
 ```
 
-### 三 字典相关操作
+
+
+### III Dictionary-related operations
 
 ```python
-# 字典用来储存映射关系
+# Dictionaries are used to store mapping relationships
 empty_dict = {}
-# 字典初始化
+# Dictionary initialization
 filled_dict = {"one": 1, "two": 2, "three": 3}
 
-# 字典也用中括号访问元素
-filled_dict["one"]  # => 1
+# Dictionaries are also accessed with middle brackets
+filled_dict["one"] # => 1
 
-# 把所有的键保存在列表中
-filled_dict.keys()  # => ["three", "two", "one"]
-# 键的顺序并不是唯一的，得到的不一定是这个顺序
+# Save all the keys in the list
+filled_dict.keys() # => ["three", "two", "one"]
+# The order of the keys is not unique, what you get is not necessarily in that order
 
-# 把所有的值保存在列表中
-filled_dict.values()  # => [3, 2, 1]
-# 和键的顺序相同
+# Save all the values in the list
+filled_dict.values() # => [3, 2, 1]
+# Same order as the keys
 
-# 判断一个键是否存在
-"one" in filled_dict  # => True
-1 in filled_dict  # => False
+# Determine if a key exists
+"one" in filled_dict # => True
+1 in filled_dict # => False
 
-# 查询一个不存在的键会抛出 KeyError
-filled_dict["four"]  # KeyError
+# Querying for a non-existent key throws a KeyError
+filled_dict["four"] # KeyError
 
-# 用 get 方法来避免 KeyError
-filled_dict.get("one")  # => 1
-filled_dict.get("four")  # => None
-# get 方法支持在不存在的时候返回一个默认值
-filled_dict.get("one", 4)  # => 1
-filled_dict.get("four", 4)  # => 4
+# Use the get method to avoid KeyError
+filled_dict.get("one") # => 1
+filled_dict.get("four") # => None
+# The get method supports returning a default value if none exists.
+filled_dict.get("one", 4) # => 1
+filled_dict.get("four", 4) # => 4
 
-# setdefault 是一个更安全的添加字典元素的方法
-filled_dict.setdefault("five", 5)  # filled_dict["five"] 的值为 5
-filled_dict.setdefault("five", 6)  # filled_dict["five"] 的值仍然是 5
+# setdefault is a safer way to add a dictionary element
+filled_dict.setdefault("five", 5) # filled_dict["five"] has a value of 5
+filled_dict.setdefault("five", 6) # filled_dict["five"] still has value 5
 ```
 
-### 四 元组相关操作
+
+
+### IV Tuple Related Operations
 
 ```python
-# 元组类似于列表，但它是不可改变的
+# A tuple is similar to a list, but it is immutable
 tup = (1, 2, 3)
-tup[0]  # => 1
-tup[0] = 3  # 类型错误
+tup[0] # => 1
+tup[0] = 3 # type error
 
-# 对于大多数的列表操作，也适用于元组
-len(tup)  # => 3
-tup + (4, 5, 6)  # => (1, 2, 3, 4, 5, 6)
-tup[:2]  # => (1, 2)
-2 in tup  # => True
+# For most list operations, this also applies to tuples
+len(tup) # => 3
+tup + (4, 5, 6) # => (1, 2, 3, 4, 5, 6)
+tup[:2] # => (1, 2)
+2 in tup # => True
 
-# 你可以将元组解包赋给多个变量
-a, b, c = (1, 2, 3)     # a 是 1，b 是 2，c 是 3
-# 如果不加括号，将会被自动视为元组
+# You can unwrap a tuple and assign it to multiple variables
+a, b, c = (1, 2, 3) # a is 1, b is 2, c is 3
+# Without parentheses, they are automatically treated as tuples
 d, e, f = 4, 5, 6
-# 现在我们可以看看交换两个数字是多么容易的事
-e, d = d, e     # d 是 5，e 是 4
+# Now we can see how easy it is to exchange two numbers
+e, d = d, e # d is 5, e is 4
 
 ```
 
-### 五 集合
+### V. Collections
 
 ```python
-# 集合储存无顺序的元素
+# Sets store unordered elements
 empty_set = set()
-# 初始化一个集合
-some_set = set([1, 2, 2, 3, 4])  # some_set 现在是 set([1, 2, 3, 4])
+# Initialize a set
+some_set = set([1, 2, 2, 3, 4]) # some_set is now set([1, 2, 3, 4])
 
-# Python 2.7 之后，大括号可以用来表示集合
-filled_set = {1, 2, 2, 3, 4}  # => {1 2 3 4}
+# After Python 2.7, curly braces can be used to represent sets
+filled_set = {1, 2, 2, 3, 4} # => {1 2 3 4}
 
-# 向集合添加元素
-filled_set.add(5)  # filled_set 现在是 {1, 2, 3, 4, 5}
+# Add elements to the set
+filled_set.add(5) # filled_set is now {1, 2, 3, 4, 5}
 
-# 用 & 来计算集合的交
+# Use & to compute the intersection of sets
 other_set = {3, 4, 5, 6}
-filled_set & other_set  # => {3, 4, 5}
+filled_set & other_set # => {3, 4, 5}
 
-# 用 | 来计算集合的并
-filled_set | other_set  # => {1, 2, 3, 4, 5, 6}
+# Use | to compute the union of sets
+filled_set | other_set # => {1, 2, 3, 4, 5, 6}
 
-# 用 - 来计算集合的差
-{1, 2, 3, 4} - {2, 3, 5}  # => {1, 4}
+# Use - to compute the difference of sets
+{1, 2, 3, 4} - {2, 3, 5} # => {1, 4}
 
-# 用 in 来判断元素是否存在于集合中
-2 in filled_set  # => True
-10 in filled_set  # => False
+# Use in to determine if an element exists in the set
+2 in filled_set # => True
+10 in filled_set # => False
 ```
 
-### 六 列表 字典 元组 集合 之间的异同
 
-相同点: 
 
-- 都是Python内置的数据结构,可以封装和操作多个数据。
+### VI Lists, dictionaries, tuples, collections, and similarities and differences between them.
 
-不同点:
+1. Similarities: Both are built-in Python data structures that can encapsulate and manipulate multiple data.
+2. Differences.
+3. - list: an ordered variable sequence, elements can be added, deleted and modified.
+   - Dictionary (dict): unordered key-value pairs, the key can not be repeated, you can add and delete key-value pairs, the value can be modified.
+   - Set (set): an unordered set of non-repeating elements, you can add and delete elements, but the elements can not be modified.
+   - Lists and tuples are sequences, dictionaries and sets are maps.
+   - Lists and tuples store elements sequentially, dictionaries and sets are not sequential.
+   - Lists and dictionaries have mutable elements, tuples and collections have immutable elements.
+   - Dictionaries are stored as key-value pairs, while the other three store only values.
+   - Sets do not allow duplicate elements, while the other three do.
 
-- 列表(list):有序可变序列,可以添加、删除和修改元素。
-- 字典(dict):无序键值对,键不能重复,可以添加和删除键值对,值可以修改。
-- 集合(set):无序不重复元素的集,可以添加和删除元素,但元素不可以修改。
-- 列表和元组是序列,字典和集合是映射类型。
-- 列表和元组按顺序存放元素,字典和集合不分顺序。
-- 列表和字典元素可变,元组和集合元素不可变。
-- 字典以键值对形式存储,其他三种只存储值。
-- 集合不允许重复元素,其他三种都可以。
+In summary, they are different in terms of mutability, ordering, and whether they contain key-value, etc., so you need to choose the right type according to the specific usage scenario.
 
-综上,四者在可变性、有序性、是否含键值等方面有所不同,需要根据具体使用场景选择合适的类型。
-
-## 流程控制
+## Process control
 
 ### 一 if...elif...else
 
 ```python
-# 新建一个变量
+# Create a new variable
 some_var = 5
 
-# 这是个 if 语句，在 python 中缩进是很重要的。
-# 下面的代码片段将会输出 "some var is smaller than 10"
-if some_var > 10:
+# This is an if statement, indentation is important in python.
+# The following code snippet will output "some var is smaller than 10"
+if some_var > 10.
     print "some_var is totally bigger than 10."
-elif some_var < 10:    # 这个 elif 语句是不必须的
-    print "some_var is smaller than 10."
-else:           # 这个 else 也不是必须的
+elif some_var < 10: # This elif statement is not required.
+    print "some_var is smaller than 10." else: # This else is also not required.
+else: # This else is also not required
     print "some_var is indeed 10."
 ```
 
@@ -337,217 +339,237 @@ else:           # 这个 else 也不是必须的
 
 ```python
 """
-用for循环遍历列表
-输出:
+Iterate through the list with a for loop
+Output.
     dog is a mammal
     cat is a mammal
     mouse is a mammal
 """
-for animal in ["dog", "cat", "mouse"]:
-    # 你可以用 % 来格式化字符串
+for animal in ["dog", "cat", "mouse"].
+    # You can format strings with %
     print "%s is a mammal" % animal
     
 """
-`range(number)` 返回从0到给定数字的列表
-输出:
+`range(number)` Returns a list of numbers from 0 to the given number.
+Output.
     0
     1
     2
     3
-"""
 for i in range(4):
     print i
 ```
+
+
 
 ### 三 while
 
 ```python
 """
-while 循环
-输出:
+while loop
+Output: 0
     0
     1
     2
     3
 """
 x = 0
-while x < 4:
+while x < 4.
     print x
-    x += 1  #  x = x + 1 的简写
+    x += 1 # shorthand for x = x + 1
 ```
 
 ### 四 try... except
 
 ```python
-# 用 try/except 块来处理异常
-try:
-    # 用 raise 来抛出异常
+# Handling exceptions with try/except blocks
+try.
+    # Throw an exception with raise
     raise IndexError("This is an index error")
-except IndexError as e:
-    pass    # pass 就是什么都不做，不过通常这里会做一些恢复工作
+except IndexError as e: # pass
+    pass # pass means do nothing, but usually some recovery work is done here
 ```
 
-## 函数
 
-### 常规函数
+
+## Functions
+
+### Regular functions ###
 
 ```python
-# 用 def 来新建函数
-def add(x, y):
+# Use def to create a new function
+def add(x, y).
     print "x is %s and y is %s" % (x, y)
-    return x + y    # 通过 return 来返回值
+    return x + y # Return values by return
 
-# 调用带参数的函数
-add(5, 6)  # => 输出 "x is 5 and y is 6" 返回 11
+# Call a function with parameters
+add(5, 6) # => output "x is 5 and y is 6" return 11
 
-# 通过关键字赋值来调用函数
-add(y=6, x=5)   # 顺序是无所谓的
+# Call a function by keyword assignment
+add(y=6, x=5) # The order doesn't matter.
 
-# 我们也可以定义接受多个变量的函数，这些变量是按照顺序排列的
-def varargs(*args):
+# We can also define functions that accept multiple variables that are in order
+def varargs(*args).
     return args
 
-varargs(1, 2, 3)  # => (1,2,3)
+varargs(1, 2, 3) # => (1,2,3)
 
 
-# 我们也可以定义接受多个变量的函数，这些变量是按照关键字排列的
+# We can also define functions that accept multiple variables, ordered by keyword
 def keyword_args(**kwargs):
     return kwargs
 
-# 实际效果：
-keyword_args(big="foot", loch="ness")  # => {"big": "foot", "loch": "ness"}
+# The actual effect:
+keyword_args(big="foot", loch="ness") # => {"big": "foot", "loch": "ness"}
 
-# 你也可以同时将一个函数定义成两种形式
+# You can also define a function in both forms at the same time
 def all_the_args(*args, **kwargs):
     print args
     print kwargs
 """
-all_the_args(1, 2, a=3, b=4) prints:
+all_the_args(1, 2, a=3, b=4) prints.
     (1, 2)
     {"a": 3, "b": 4}
 """
 
-# 当调用函数的时候，我们也可以进行相反的操作，把元组和字典展开为参数
+# When calling a function, we can also do the opposite, expanding tuples and dictionaries into arguments
 args = (1, 2, 3, 4)
 kwargs = {"a": 3, "b": 4}
-all_the_args(*args)  # 等价于 foo(1, 2, 3, 4)
-all_the_args(**kwargs)  # 等价于 foo(a=3, b=4)
-all_the_args(*args, **kwargs)  # 等价于 foo(1, 2, 3, 4, a=3, b=4)
+all_the_args(*args) # Equivalent to foo(1, 2, 3, 4)
+all_the_args(**kwargs) # equivalent to foo(a=3, b=4)
+all_the_args(*args, **kwargs) # Equivalent to foo(1, 2, 3, 4, a=3, b=4)
 
-# 函数在 python 中是一等公民
-def create_adder(x):
-    def adder(y):
+# Functions are first class citizens in python
+def create_adder(x).
+    def adder(y).
         return x + y
     return adder
 
 add_10 = create_adder(10)
-add_10(3)  # => 13
+add_10(3) # => 13
 
 ```
 
-### 匿名函数
+
+
+### anonymous function
 
 ```python
-# 匿名函数
+# anonymous function
 (lambda x: x > 2)(3)  # => True
 ```
 
-### 内置高阶函数
+
+
+### Built-in higher-order functions
 
 ```python
-# 内置高阶函数
+# Built-in higher-order functions
 map(add_10, [1, 2, 3])  # => [11, 12, 13]
 filter(lambda x: x > 5, [3, 4, 5, 6, 7])  # => [6, 7]
 ```
 
-### 高阶技巧
+
+
+### advanced technique
 
 ```python
-# 可以用列表方法来对高阶函数进行更巧妙的引用
+# You can use list methods to make more subtle references to higher-order functions
 [add_10(i) for i in [1, 2, 3]]  # => [11, 12, 13]
 [x for x in [3, 4, 5, 6, 7] if x > 5]  # => [6, 7]
 ```
 
-## 类
 
-### 类的继承
+
+## Classes
+
+### Class inheritance
 
 ```python
-# 我们新建的类是从 object 类中继承的
-class Human(object):
+# Our new class inherits from the object class.
+class Human(object).
 
-     # 类属性，由所有类的对象共享
+     # Class attribute, shared by all objects of the class
     species = "H. sapiens"
 
-    # 基本构造函数
-    def __init__(self, name):
-        # 将参数赋给对象成员属性
+    # Basic constructor
+    def __init__(self, name).
+        # Assign parameters to object member attributes
         self.name = name
 
-    # 成员方法，参数要有 self
-    def say(self, msg):
+    # Member method with self as argument
+    def say(self, msg): # Return "%s: %s" % (self.name).
         return "%s: %s" % (self.name, msg)
 
-    # 类方法由所有类的对象共享
-    # 这类方法在调用时，会把类本身传给第一个参数
+    # Class methods are shared by all objects of the class
+    # This class method passes the class itself as the first parameter when it is called
     @classmethod
-    def get_species(cls):
+    def get_species(cls):: return cls.species(cls).
         return cls.species
 
-    # 静态方法是不需要类和对象的引用就可以调用的方法
+    # Static methods are methods that don't require a reference to a class or an object to be called.
     @staticmethod
-    def grunt():
+    def grunt(): return "*grunt*
         return "*grunt*"
 ```
 
-### 类的使用
+
+
+### Use of Classes
 
 ```python
 
-# 实例化一个类
+# Instantiate a class
 i = Human(name="Ian")
-print i.say("hi")     # 输出 "Ian: hi"
+print i.say("hi") # output "Ian: hi"
 
 j = Human("Joel")
-print j.say("hello")  # 输出 "Joel: hello"
+print j.say("hello") # output "Joel: hello"
 
-# 访问类的方法
-i.get_species()  # => "H. sapiens"
+# Access the methods of the class
+i.get_species() # => "H. sapiens"
 
-# 改变共享属性
+# Change the shared properties
 Human.species = "H. neanderthalensis"
-i.get_species()  # => "H. neanderthalensis"
-j.get_species()  # => "H. neanderthalensis"
+i.get_species() # => "H. neanderthalensis"
+j.get_species() # => "H. neanderthalensis"
 
-# 访问静态变量
-Human.grunt()  # => "*grunt*"
+# Access static variables
+human.grunt() # => "*grunt*"
 ```
 
-## 模块
+
+
+## module 
 
 ```python
-# 我们可以导入其他模块
+# We can import other modules
 import math
-print math.sqrt(25)  # => 5
+print math.sqrt(25) # => 5
 
-# 我们也可以从一个模块中导入特定的函数
+# We can also import specific functions from a module
 from math import ceil, floor
-print ceil(4.7)   # => 5.0
-print floor(4.7)  # => 4.0
+print ceil(4.7) # => 5.0
+print floor(4.7) # => 4.0
 
-# 从模块中导入所有的函数
-# 警告：不推荐使用
+# Import all functions from a module
+# Warning: not recommended
 from math import *
 
-# 简写模块名
+# Shorten the module name
 import math as m
-math.sqrt(16) == m.sqrt(16)  # => True
+math.sqrt(16) == m.sqrt(16) # => True
 
-# Python的模块其实只是普通的python文件
-# 你也可以创建自己的模块，并且导入它们
-# 模块的名字就和文件的名字相同
+# Python modules are really just normal python files.
+# You can also create your own modules and import them.
+# The module name is the same as the file name.
 
-# 也可以通过下面的方法查看模块中有什么属性和方法
+# You can also see what properties and methods are in a module by doing the following
 import math
 dir(math)
 ```
+
+
+
+
+
