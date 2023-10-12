@@ -1,72 +1,72 @@
 ---
-title: pandas 5分钟快速入门
+title: pandas 5-minute quickstart
 date: 2023-07-22 16:44:00
 categories:
-  - 量化交易
-tags:
-  - 量化交易
+  - Quantitative Trading
+tags: 
+  - Quantitative trading
   - python
-  - 入门
-  - 快速
+  - Getting Started
   - pandas
-  - 5分钟
-description: '本文不适合对于python语言没有基础的朋友, 适合有语言基础或者用过一段时间python语言但是有些语法有些模糊的朋友,你可以把这个文档当作pandas的用法备忘,随时查阅一些模糊的或者记忆不太扎实的地方'
+  - pandas
+  - 5 minutes
+description: This article is not suitable for python language has no basis for friends, suitable for language foundation or use a period of time python language but some of the syntax is a bit fuzzy friends, you can use this document as a pandas usage memo, at any time to check some fuzzy or memory is not too solid place
 cover: https://s2.loli.net/2023/07/22/LgZKXF3PUYpxjkf.jpg
 ---
 
-## 导入pandas库
+## Importing the pandas library
 
 ```python
-import pandas as pd  # 将pandas作为第三方库导入，我们一般为pandas取一个别名叫做pd
-pd.set_option('expand_frame_repr', False)  # 当列太多时不换行
+import pandas as pd  # To import pandas as a third-party library, we usually give pandas an alias called pd
+pd.set_option('expand_frame_repr', False)  # No line breaks when there are too many columns
 ```
 
-## 导入数据
+## Import data
 
 ```python
 df = pd.read_csv(
-    # 该参数为数据在电脑中的路径
-    filepath_or_buffer='BITFINEX_BTCUSD_20180124_1T.csv',
-    # 该参数代表数据的分隔符，csv文件默认是逗号。其他常见的是'\t'
-    sep=',',
-    # 该参数代表跳过数据文件的的第1行不读入
-    skiprows=1,
-    # nrows，只读取前n行数据，若不指定，读入全部的数据
-    nrows=15,
-    # 将指定列的数据识别为日期格式。若不指定，时间数据将会以字符串形式读入。一开始先不用。
-    parse_dates=['candle_begin_time'],
-    # 将指定列设置为index。若不指定，index默认为0, 1, 2, 3, 4...
-    index_col=['candle_begin_time'],
-    # 读取指定的这几列数据，其他数据不读取。若不指定，读入全部列
-    # usecols=['candle_begin_time', 'close'],
-    # 当某行数据有问题时，报错。设定为False时即不报错，直接跳过该行。当数据比较脏乱的时候用这个。
-    # error_bad_lines=False,
-    # 将数据中的null识别为空值
-    # na_values='NULL',
+        # This parameter is the path of the data in the computer
+        filepath_or_buffer = 'BITFINEX_BTCUSD_20180124_1T.csv',
+        # This parameter represents the separator for the data, the default for csv files is a comma. Other common ones are '\t'
+        sep=',', # This parameter represents skipping the data file.
+        # This parameter means skip the first line of the data file and do not read it in.
+        skiprows=1, # nrows.
+        # nrows, only read the first n lines of data, if not specified, read all the data.
+        nrows=15, # Read only the first n rows of data, if not specified, read all data.
+        # Recognizes the data in the specified column as a date. If not specified, time data will be read in as a string. Don't use it at first.
+        parse_dates=['candle_begin_time'], # Read all the data.
+        # Set the specified column to index. if not specified, index defaults to 0, 1, 2, 3, 4...
+        index_col=['candle_begin_time'], # Set the specified columns to index.
+        # Read the specified columns, no other data will be read. If not specified, read all columns
+        # usecols=['candle_begin_time', 'close'], # Read the data in the specified columns.
+         When set to False, no error is reported and the row is skipped. Use this when the data is dirty.
+        # error_bad_lines=False.
+        # Recognize nulls in data as nulls.
+        # na_values='NULL', # identify nulls in the data as nulls.
 
-    # 更多其他参数，请直接搜索"pandas read_csv"，要去逐个查看一下。比较重要的，header等
-)
+        # More other parameters, please directly search for "pandas read_csv", to go through them one by one. The more important ones, header, etc.
+    )
 ```
 
 ![](https://s2.loli.net/2023/07/22/PBgx5VXL3QSaquh.png)
 
-使用read_csv导入数据非常方便, 导入的数据的数据类型是DataFrame。导入数据主要使用read系列函数还有read_table、read_excel、read_json等，他们的参数内容都是大同小异，可以自行搜索查看。
+The use of read_csv import data is very convenient, the data type of the imported data is DataFrame. import data using the read series of functions and read_table, read_excel, read_json, etc., the content of their parameters are similar to each other, you can search for their own view.
 
-## 查看数据
+## View Data
 
 ```python
-print(df.shape)  # 输出dataframe有多少行、多少列。
-print(df.shape[0])  # 取行数量，相应的列数量就是df.shape[1]
-print(df.columns)  # 顺序输出每一列的名字，演示如何for语句遍历。
-print(df.index)  # 顺序输出每一行的名字，可以for语句遍历。
-print(df.dtypes)  # 数据每一列的类型不一样，比如数字、字符串、日期等。该方法输出每一列变量类型
-print(df.head(3))  # 看前3行的数据，默认是5。与自然语言很接近
-print(df.tail(3))  # 看最后3行的数据，默认是5。
-print(df.sample(n=3))  # 随机抽取3行，想要去固定比例的话，可以用frac参数
-print(df.describe())  # 非常方便的函数，对每一列数据有直观感受；只会对数字类型的列有效
+print(df.shape) # Output how many rows and columns the dataframe has.
+print(df.shape[0]) # Take the number of rows, and the corresponding number of columns is df.shape[1].
+print(df.columns) # Output the name of each column in order, demonstrating how to traverse with a for statement.
+print(df.index) # Outputs the name of each row in order, which can be traversed with a for statement.
+print(df.dtypes) # Each column of data has a different type, such as numbers, strings, dates, etc. This method outputs each column's variable type. This method outputs each column variable type
+print(df.head(3)) # Look at the first 3 rows of data, default is 5. Very close to natural language
+print(df.tail(3)) # Look at the last 3 rows of data, default is 5.
+print(df.sample(n=3)) # randomly pick 3 rows, use frac parameter if you want to go to a fixed ratio
+print(df.describe()) # Very handy function to get a visual sense of each column of data; will only work for numeric columns
 ```
 
-## 数据修正
+## data correction
 
 ```python
 # 对print出的数据格式进行修正
@@ -79,254 +79,256 @@ print(df.head())
 # 更多设置请见http://pandas.pydata.org/pandas-docs/stable/options.html
 ```
 
-## 选取指定的数据
+## Selects the specified data
 
 ```python
-# =====如何选取指定的行、列
-print(df['open'])  # 根据列名称来选取，读取的数据是Series类型
-print(df[['candle_begin_time', 'close']])  # 同时选取多列，需要两个括号，读取的数据是DataFrame类型
+# ===== how to pick specified rows, columns
+print(df['open']) # pick based on column name, read data is Series type
+print(df[['candle_begin_time', 'close']]) # Select multiple columns at the same time, need two brackets, the data read is DataFrame type
 
-# loc操作：通过label（columns和index的名字）来读取数据
-print(df.loc['2018-01-24 00:01:00'])  # 选取指定的某一行，读取的数据是Series类型
-print(df.loc[['2018-01-24 00:01:00', '2018-01-24 00:04:00']])  # 选取指定的两行
-print(df.loc['2018-01-24 00:01:00': '2018-01-24 00:06:00'])  # 选取在此范围内的多行，和在list中slice操作类似，读取的数据是DataFrame类型
-print(df.loc[:, 'open':'close'])  # 选取在此范围内的多列，读取的数据是DataFrame类型
-print(df.loc['2018-01-24 00:01:00': '2018-01-24 00:05:00', 'open':'close'])  # 读取指定的多行、多列。逗号之前是行的范围，逗号之后是列的范围。读取的数据是DataFrame类型
-print(df.loc[:, :])  # 读取所有行、所有列，读取的数据是DataFrame类型
-print(df.at['2018-01-24 00:01:00', 'open'])  # 使用at读取指定的某个元素。loc也行，但是at更高效。
+# loc operation: read data by label (name of columns and index)
+print(df.loc['2018-01-24 00:01:00']) # select a specified row, the data read is Series type
+print(df.loc[['2018-01-24 00:01:00', '2018-01-24 00:04:00']]) # Pick the specified two rows
+print(df.loc['2018-01-24 00:01:00': '2018-01-24 00:06:00']) # pick multiple rows in this range, similar to the slice operation in list, the data read is of DataFrame type
+print(df.loc[:, 'open':'close']) # Select multiple columns in this range, the data read is of type DataFrame
+print(df.loc['2018-01-24 00:01:00': '2018-01-24 00:05:00', 'open':'close']) # Read the specified multiple rows and columns. Before the comma is the range of rows, after the comma is the range of columns. The data to be read is of type DataFrame
+print(df.loc[:, :]) # Read all rows, all columns, data read is DataFrame type
+print(df.at['2018-01-24 00:01:00', 'open']) # Use at to read one of the specified elements. loc works too, but at is more efficient.
 
-# iloc操作：通过position来读取数据
-print(df.iloc[0])  # 以index选取某一行，读取的数据是Series类型
-print(df.iloc[1:3])  # 选取在此范围内的多行，读取的数据是DataFrame类型
-print(df.iloc[:, 1:3])  # 选取在此范围内的多列，读取的数据是DataFrame类型
-print(df.iloc[1:3, 1:3])  # 读取指定的多行、多列，读取的数据是DataFrame类型
-print(df.iloc[:, :])  # 读取所有行、所有列，读取的数据是DataFrame类型
-print(df.iat[1, 1])  # 使用iat读取指定的某个元素。使用iloc也行，但是iat更高效。
+# iloc operation: read data by position
+print(df.iloc[0]) # Pick a row by index, read data is Series type.
+print(df.iloc[1:3]) # select multiple rows in this range, the data read is of type DataFrame
+print(df.iloc[:, 1:3]) # select multiple columns in this range, the data read is of type DataFrame
+print(df.iloc[1:3, 1:3]) # read the specified multiple rows and columns, the data read is of type DataFrame
+print(df.iloc[:, :]) # Read all rows, all columns, the data read is of type DataFrame
+print(df.iat[1, 1]) # Use iat to read a specified element. Using iloc works too, but iat is more efficient.
 ```
 
-## 列操作
+## column operation
 
 ```python
-# 行列加减乘除
-print('2018年1月24日' + df['北京时间'])  # 字符串列可以直接加上字符串，对整列进行操作
-print(df['close'] * 100)  # 数字列直接加上或者乘以数字，对整列进行操作。
+# rows and columns add, subtract, multiply and divide
+print('January 24, 2018' + df['BST']) # String columns can be directly added to strings to operate on whole columns
+print(df['close'] * 100) # Numeric columns can be added or multiplied directly to operate on whole columns.
 print(df[['close', 'volume']])
-print(df['close'] * df['volume'])  # 两列之间可以直接操作。收盘价*成交量计算出的是什么？
-# 新增一列
-df['北京时间2'] = '2018年1月24日' + df['北京时间']
-df['交易所'] = 'bitfinex'
+print(df['close'] * df['volume']) # The two columns can be manipulated directly between them. What is the closing price * volume calculated?
+# Add a new column
+df['BST2'] = 'January 24, 2018' + df['BST']
+df['exchange'] = 'bitfinex'
 ```
 
-## 统计函数
+## statistical function
 
 ```python
-# =====统计函数
-print(df['close'].mean())  # 求一整列的均值，返回一个数。会自动排除空值。
-print(df[['close', 'volume']].mean())  # 求两列的均值，返回两个数，Series
+# ===== statistics function
+print(df['close'].mean()) # Finds the mean of an entire column, returning a number. Null values are automatically excluded.
+print(df[['close', 'volume']].mean()) # Find the mean of two columns, return two numbers, Series
 print(df[['close', 'volume']])
-print(df[['close', 'volume']].mean(axis=1))  # 求两列的均值，返回DataFrame。axis=0或者1要搞清楚。
-# axis=1，代表对整几列进行操作。axis=0（默认）代表对几行进行操作。实际中弄混很正常，到时候试一下就知道了。
+print(df[['close', 'volume']].mean(axis=1)) # Find the mean of two columns, return DataFrame. axis=0 or 1 to be clear.
+# axis=1, on behalf of the operation on the whole several columns. axis=0 (default) on behalf of the operation on several rows. It's normal to get confused in practice, just try it out.
 
-print(df['high'].max())  # 最大值
-print(df['low'].min())  # 最小值
-print(df['close'].std())  # 标准差
-print(df['close'].count())  # 非空的数据的数量
-print(df['close'].median())  # 中位数
-print(df['close'].quantile(0.25))  # 25%分位数
-# 还有其他的函数计算其他的指标，在实际使用中遇到可以自己搜索
+print(df['high'].max()) # Maximum value.
+print(df['low'].min()) # min value
+print(df['close'].std()) # standard deviation
+print(df['close'].count()) # number of non-empty data
+print(df['close'].median()) # median
+print(df['close'].quantile(0.25)) # 25% quantile
+# There are other functions to calculate other metrics, so you can search for them yourself if you encounter them in practice.
 ```
 
-## shift类函数、删除列的方式
+## Shift-like functions, ways to delete columns
 
 ```python
+# =====shift class function, way to delete columns
+df['next cycle close'] = df['close'].shift(-1) # Read the data of the previous row, if the parameter is set to 3, it is to read the data of the last three rows; if the parameter is set to -1, it is to read the data of the next row;
+del df['next cycle close'] # method to delete a column
 
-# =====shift类函数、删除列的方式
-df['下周期close'] = df['close'].shift(-1)  # 读取上一行的数据，若参数设定为3，就是读取上三行的数据；若参数设定为-1，就是读取下一行的数据；
-del df['下周期close']  # 删除某一列的方法
+df['up or down'] = df['close'].diff(-1) # find the value obtained by subtracting the data in this row from the data in the previous row
+print(df[['close', 'up/down']])
+df.drop(['close', 'close']], axis=1, inplace=True) # another way to delete a column, inplace parameter means whether to replace the original df or not
 
-df['涨跌'] = df['close'].diff(-1)  # 求本行数据和上一行数据相减得到的值
-print(df[['close', '涨跌']])
-df.drop(['涨跌'], axis=1, inplace=True)  # 删除某一列的另外一种方式，inplace参数指是否替代原来的df
+df['up/down'] = df['close'].pct_change(1) # similar to diff, but the ratio of the two numbers is the equivalent of the up/down ratio
 
-df['涨跌幅'] = df['close'].pct_change(1)  # 类似于diff，但是求的是两个数直接的比例，相当于求涨跌幅
-
-# =====cum(cumulative)类函数
-df['volume_cum'] = df['volume'].cumsum()  # 该列的累加值
+# =====cum(cumulative)-like function
+df['volume_cum'] = df['volume'].cumsum() # The cumulative value of the column
 print(df[['volume', 'volume_cum']])
-print((df['涨跌幅'] + 1.0).cumprod())  # 该列的累乘值，此处计算的就是资金曲线，假设初始1元钱。
+print((df['volume'] + 1.0).cumsrod()) # Cumulative value of the column, here the calculation is the money curve, assuming an initial 1$
 ```
 
-## 其他列函数
+## Other column functions
 
 ```python
-# =====其他列函数
-df['close_排名'] = df['close'].rank(ascending=True, pct=False)  # 输出排名。ascending参数代表是顺序还是逆序。pct参数代表输出的是排名还是排名比例
-print(df[['close', 'close_排名']])
-del df['close_排名']
-print(df['close'].value_counts())  # 计数。统计该列中每个元素出现的次数。返回的数据是Series
+# ===== other column functions
+df['close_rank'] = df['close'].rank(ascending=True, pct=False) # Output the rank. ascending parameter represents whether it's sequential or inverse. pct parameter represents whether the output is ranked or a percentage of ranked
+print(df[['close', 'close_rank']])
+del df['close_rank']]
+print(df['close'].value_counts()) # Count. Counts the number of times each element in the column appears. The data returned is Series
 ```
 
-## 数据筛选 
+## Data filtering 
 
 ```python
-# =====筛选操作，根据指定的条件，筛选出相关的数据。
-print(df['symbol'] == 'AIDBTC')  # 判断交易对代码是否等于BTCUSD
-print(df[df['symbol'] == 'BTCUSD'])  # 将判断为True的输出：选取交易对代码等于BTCUSD的行
-print(df[df['symbol'] == 'BTCUSD'].index)  # 输出判断为True的行的index
-print(df[df['symbol'].isin(['BTCUSD', 'LTCUSD', 'ETHUSD'])])  # 选取代码等于'BTCUSD'或'LTCUSD '或'ETHUSD'的行
-print(df[df['close'] < 10.0])  # 选取收盘价小于10的行
-print(df[(df['close'] < 10.0) & (df['symbol'] == 'AIDUSD')])  # 两个条件，或者的话就是|
+# ===== Filtering operation to filter out relevant data based on specified conditions.
+print(df['symbol'] == 'AIDBTC') # Determine if the pair code is equal to BTCUSD
+print(df[df['symbol'] == 'BTCUSD']) # Output that will be judged as True: pick the rows where the pair code is equal to BTCUSD
+print(df[df['symbol'] == 'BTCUSD'].index) # output the index of the row judged True
+print(df[df['symbol'].isin(['BTCUSD', 'LTCUSD', 'ETHUSD'])]) # pick rows with code equal to 'BTCUSD' or 'LTCUSD ' or 'ETHUSD'
+print(df[df['close'] < 10.0]) # Pick rows with a close less than 10
+print(df[(df['close'] < 10.0) & (df['symbol'] == 'AIDUSD')]) # Two conditions, or if it is |
 ```
 
-## 缺失值处理
+## Missing value handling
 
 ```python
-# =====缺失值处理：原始数据中存在缺失值，如何处理？
-# 创建缺失值
+# ===== Missing value handling: there are missing values in the raw data, how to handle them?
+# Create missing values
 index = df[df['candle_begin_time'].isin(['2018-01-24 00:00:00', '2018-01-24 12:00:00'])].index
-df.loc[index, '12小时'] = df['candle_begin_time']
+df.loc[index, '12 hours'] = df['candle_begin_time']
 
-# 删除缺失值
-print(df.dropna(how='any'))  # 将带有空值的行删除。how='any'意味着，该行中只要有一个空值，就会删除，可以改成all。
-print(df.dropna(subset=['12小时', 'close'], how='all'))  # subset参数指定在特定的列中判断空值。
-# all代表全部为空，才会删除该行；any只要一个为空，就删除该行。
+# Drop the missing values
+print(df.dropna(how='any')) # Remove rows with null values. how='any' means, as long as there is a null value in the row, it will be removed, can be changed to all.
+print(df.dropna(subset=['12 hours', 'close'], how='all')) # The subset parameter specifies that null values are judged in a particular column.
+# all means all are null before the row is deleted; any deletes the row as long as one is null.
 
-# 补全缺失值
-print(df.fillna(value=0))  # 直接将缺失值赋值为固定的值
-# df['12小时'].fillna(value=df['close'], inplace=True)  # 直接将缺失值赋值其他列的数据
+# Fill in missing values
+print(df.fillna(value=0)) # Directly assign missing values to fixed values
+# df['12 hours'].fillna(value=df['close'], inplace=True) # Directly assign missing values to other columns of data
 print(df)
-print(df.fillna(method='ffill'))  # 向上寻找最近的一个非空值，以该值来填充缺失的位置，全称forward fill，非常有用
-print(df.fillna(method='bfill'))  # 向下寻找最近的一个非空值，以该值来填充确实的位置，全称backward fill
+print(df.fillna(method='ffill')) # Find the nearest non-null value upwards and fill the missing position with that value, called forward fill, very useful
+print(df.fillna(method='bfill')) # look down to the nearest non-null value and fill the true position with that value, known as backward fill
 
-# 找出缺失值
-print(df.notnull())  # 判断是否为空值，反向函数为isnull()
-print(df[df['12小时'].notnull()])  # 将'12小时'列为空的行输出
+# Find the missing value
+print(df.notnull()) # Determine if it is null, reverse function isnull()
+print(df[df['12 hours'].notnull()]) # Output the line with '12 hours' listed as null
 ```
 
-## 排序函数
+## sorting function
 
 ```python
-print(df.sort_values(by=['candle_begin_time'], ascending=0))  # by参数指定按照什么进行排序，acsending参数指定是顺序还是逆序，1顺序，0逆序
-print(df.sort_values(by=['symbol', 'candle_begin_time'], ascending=[0, 0]))  # 按照多列进行排序
+print(df.sort_values(by=['candle_begin_time'], ascending=0)) # The by parameter specifies what to sort by, and the ascending parameter specifies whether it's sequential or inverse, 1 sequential, 0 inverse
+print(df.sort_values(by=['symbol', 'candle_begin_time'], ascending=[0, 0])) # sort by multiple columns
 ```
 
-## 数据合并
+## Data consolidation
 
 ```python
-# =====两个df上下合并操作，append操作
+# ===== two df up and down merge operations, append operations
 df1 = df.iloc[0:10][['candle_begin_time', 'symbol', 'close', 'volume']]
 print(df1)
 df2 = df.iloc[5:15][['candle_begin_time', 'symbol', 'close', 'volume']]
 print(df2)
-print(df1.append(df2))  # append操作，将df1和df2上下拼接起来。注意观察拼接之后的index。index可以重复
-df3 = df1.append(df2, ignore_index=True)  # ignore_index参数，用户重新确定index
+print(df1.append(df2)) # append operation to splice df1 and df2 up and down. Watch the index after the append. index can be repeated
+df3 = df1.append(df2, ignore_index=True) # ignore_index parameter, user re-determines index.
 print(df3)    
 ```
 
-## 数据去重
+## Data de-duplication
 
 ```python
-# =====对数据进行去重
-# df3中有重复的行数，我们如何将重复的行数去除？
+# ===== de-duplicating data
+# There are duplicate rows in df3, how do we get rid of the duplicates?
 df3.drop_duplicates(
-subset=['candle_begin_time', 'symbol'], # subset参数用来指定根据哪类类数据来判断是否重复。若不指定，则用全部列的数据来判断是否重复
-keep='first',  # 在去除重复值的时候，我们是保留上面一行还是下面一行？first保留上面一行，last保留下面一行，False就是一行都不保留
+subset=['candle_begin_time', 'symbol'], # The subset parameter is used to specify the class of data based on which to determine if it is duplicated. If not specified, all columns will be used to determine duplicates.
+keep='first', # When removing duplicates, do we keep the top row or the bottom row? first keeps the top row, last keeps the bottom row, False keeps none of the rows.
 inplace=True)
 print(df3)
 ```
 
-## 其他常用重要函数
+## Other Important Functions
 
 ```python
-# =====其他常用重要函数
-df.reset_index(inplace=True, drop=False)  # 重置index
-print(df.rename(columns={'close': '收盘价', 'open': '开盘价'}))  # rename函数给变量修改名字。使用dict将要修改的名字传给columns参数
-print(df.empty)  # 判断一个df是不是为空，此处输出不为空
-print(pd.DataFrame().empty)  # pd.DataFrame()创建一个空的DataFrame，此处输出为空
-print(df.T)  # 将数据转置，行变成列，很有用
+# ===== other common and important functions
+df.reset_index(inplace=True, drop=False) # reset index
+print(df.rename(columns={'close': 'close', 'open': 'open'})) # The rename function changes the name of the variable. The name to be changed is passed to the columns parameter using dict
+print(df.empty) # Determine if a df is empty.
+print(pd.DataFrame().empty) # pd.DataFrame() creates an empty DataFrame.
+print(pd.DataFrame().empty) # pd.DataFrame() creates an empty DataFrame, output here is empty
 ```
 
-## 字符串处理
+## string processing (computing)
 
 ```python
-# =====字符串处理
+# ===== string processing
 print(df['symbol'])
 print('BTCUSD'[:3])
 print(df['symbol'].str[:3])
-print(df['symbol'].str.upper())  # 加上str之后可以使用常见的字符串函数对整列进行操作
+print(df['symbol'].str.upper()) # After adding str you can use common string functions to manipulate the whole columns
 print(df['symbol'].str.lower())
-print(df['symbol'].str.len())  # 计算字符串的长度,length
-df['symbol'].str.strip()  # strip操作，把字符串两边的空格去掉
+print(df['symbol'].str.len()) # Calculate the length of the string, length
+df['symbol'].str.strip() # strip operation, remove spaces on both sides of the string
 print(df['symbol'])
-print(df['symbol'].str.contains('AID'))  # 判断字符串中是否包含某些特定字符
-print(df['symbol'].str.replace('AID', 'AVT'))  # 进行替换，将sz替换成sh
-# # 更多字符串函数请见：http://pandas.pydata.org/pandas-docs/stable/text.html#method-summary
+print(df['symbol'].str.contains('AID')) # Determine whether a string contains certain characters or not
+print(df['symbol'].str.replace('AID', 'AVT')) # do replacement, replace sz with sh
+# # For more string functions see: http://pandas.pydata.org/pandas-docs/stable/text.html#method-summary
 ```
 
-## 时间处理
+## time handling
 
 ```python
-# =====时间处理
+# ===== time processing
 print(df['candle_begin_time'])
 print(df.at[0, 'candle_begin_time'])
 print(type(df.at[0, 'candle_begin_time']))
 df.rename(/)
-df['candle_begin_time'] = pd.to_datetime(df['candle_begin_time'])  # 将交易日期由字符串改为时间变量
+df['candle_begin_time'] = pd.to_datetime(df['candle_begin_time']) # change transaction date from string to time variable
 print(df.at[0, 'candle_begin_time'])
 print(type(df.at[0, 'candle_begin_time']))
 
-print(pd.to_datetime('1999年1月11日'))  # pd.to_datetime函数：将字符串转变为时间变量
+print(pd.to_datetime('January 11, 1999')) # pd.to_datetime function: transforms strings into time variables
 print(df['candle_begin_time'])
-print(df['candle_begin_time'].dt.year)  # 输出这个日期的年份。相应的month是月份，day是天数，还有hour, minute, second
-print(df['candle_begin_time'].dt.week)  # 这一天是一年当中的第几周
-print(df['candle_begin_time'].dt.dayofyear)  # 这一天是一年当中的第几天
-print(df['candle_begin_time'].dt.dayofweek)  # 这一天是这一周当中的第几天，0代表星期一
-print(df['candle_begin_time'].dt.weekday)  # 和上面函数相同，更加常用
-print(df['candle_begin_time'].dt.weekday_name)  # 和上面函数相同，返回的是星期几的英文，用于报表的制作。
-print(df['candle_begin_time'].dt.days_in_month)  # 这一天所在月份有多少天
-print(df['candle_begin_time'].dt.is_month_start)  # 这一天是否是该月的开头，是否存在is_month_end？
-print(df['candle_begin_time'] + pd.Timedelta(hours=1))  # 增加一天，Timedelta用于表示时间差数据，[weeks, days, hours, minutes, seconds, milliseconds, microseconds, nanoseconds]
-print((df['candle_begin_time'] + pd.Timedelta(days=1)) - df['candle_begin_time'])  # 增加一天然后再减去今天的日期
+print(df['candle_begin_time'].dt.year) # Output the year for this date. The corresponding month is the month, day is the day, and hour, minute, second
+print(df['candle_begin_time'].dt.week) # What week of the year is this day
+print(df['candle_begin_time'].dt.dayofyear) # What day of the year is this?
+print(df['candle_begin_time'].dt.dayofweek) # This day is the first day of the week, with 0 being Monday
+print(df['candle_begin_time'].dt.dayofweek) # Same function as above, but more commonly used
+print(df['candle_begin_time'].dt.weekday_name) # Same function as above, returns the day of the week in English, used for reports.
+print(df['candle_begin_time'].dt.days_in_month) # how many days in the month this day is in
+print(df['candle_begin_time'].dt.is_month_start) # Is this day the beginning of the month and is there an is_month_end?
+print(df['candle_begin_time'] + pd.Timedelta(hours=1)) # add a day, Timedelta is used to represent time difference data, [weeks, days, hours, minutes, seconds, milliseconds, microseconds, nanoseconds microseconds, nanoseconds]
+print((df['candle_begin_time'] + pd.Timedelta(days=1)) - df['candle_begin_time']) # add a day then subtract today's date
 ```
 
-## rolling、expanding操作
+## Rolling, expanding operations
 
 ```python
-# =====rolling、expanding操作
-# 计算'close'这一列的均值
+# =====rolling, expanding operations
+# Calculate the mean of the column 'close'
 print(df['close'])
-# 如何得到每一天的最近3天close的均值呢？即如何计算常用的移动平均线？
-# 使用rolling函数
-df['收盘价_3天均值'] = df['close'].rolling(3).mean()
-print(df[['close', '收盘价_3天均值']])
-rolling(n)即为取最近n行数据的意思，只计算这n行数据。后面可以接各类计算函数，例如max、min、std等
+# How do I get the average of the last 3 days of close for each day? i.e. how to calculate the common moving average?
+# Use the rolling function
+df['close_3-day_mean'] = df['close'].rolling(3).mean()
+print(df[['close', 'close_3_day_mean']])
+rolling(n) means to take the last n rows of data, only calculate the n rows of data. Can be followed by various types of calculation functions, such as max, min, std, etc.
 print(df['close'].rolling(5).max())
 print(df['close'].rolling(3).min())
 print(df['close'].rolling(3).std())
 
-# rolling可以计算每天的最近3天的均值，如果想计算每天的从一开始至今的均值，应该如何计算？
-# 使用expanding操作
-df['收盘价_至今均值'] = df['close'].expanding().mean()
-print(df[['close', '收盘价_至今均值']])
+# rolling can calculate the average of the last 3 days for each day, what should I do if I want to calculate the average of each day from the beginning to the present?
+# Use expanding operation
+df['close_to_date_mean'] = df['close'].expanding().mean()
+print(df[['close', 'close_to_date_mean']])
 
-# expanding即为取从头至今的数据。后面可以接各类计算函数
+# expanding means taking the data from the beginning to the present. This can be followed by all sorts of math functions
 print(df['close'].expanding().max())
 print(df['close'].expanding().min())
 print(df['close'].expanding().std())
 
-# rolling和expanding简直是为量化领域量身定制的方法，经常会用到。
+# rolling and expanding are simply tailor-made methods for the quantitative domain and are often used.
 ```
 
-## 输出
+## exports
 
 ```python
-# =====输出到本地文件
+# ===== output to local file
 print(df)
 df.to_csv('output.csv', index=False)
 ```
 
-## 函数大全
+## The Complete List of Functions
 
-哪里可以看到全部的函数？
+Where can I see all the functions?
 
 http://pandas.pydata.org/pandas-docs/stable/api.html 
+
+
+
