@@ -1,174 +1,176 @@
 ---
-title: ffmpeg常用命令
+title: ffmpeg common commands
 date: 2023-07-23 22:29:00
 categories:
-  - 杂项
-tags:
-  - 视频处理
-  - 视频压缩
+  - Miscellaneous
+tags: 
+  - Video Processing
+  - Video Compression
   - ffmpeg
-  - 视频分割
-  - 视频合并
-  - 显卡支持
-description: '本文主要总结和展示了ffmpeg这个强大的媒体处理工具的常用功能和命令。文章列出了ffmpeg执行这些操作的具体命令,如视频采集摄像头命令,音频和视频转换命令,对视频截图命令,为视频添加水印命令等等。文中所有的ffmpeg命令都进行了示例和解释,便于读者理解记忆。最后,文章给出了一些ffmpeg的高级用法,如使用滤镜处理视频,对GIF动图处理等。'
+  - Video Splitting
+  - Video Merge
+  - Graphics card support
+description: This article summarizes and demonstrates the common functions and commands of ffmpeg, a powerful media processing tool. The article lists the specific commands for ffmpeg to perform these operations, such as video capture camera commands, audio and video conversion commands, commands to take screenshots of the video, commands to add watermarks to the video, etc. All the ffmpeg commands in the article are summarized and shown. All the ffmpeg commands in the article are exemplified and explained, which is easy for readers to understand and memorize. Finally, the article gives some advanced usage of ffmpeg, such as using filters to process videos, processing GIF motion pictures, etc.
 cover: https://s2.loli.net/2023/07/24/uxe2mkvdq64o5EH.webp
 ---
 
-## 音频视频合并
+### Audio Video Merge
 
 ```shell
-ffmpeg -i 视频文件名 -i 音频文件名 -codec copy 输出MP4 文件名
+ffmpeg -i video filename -i audio filename -codec copy output MP4 filename
 ```
 
-## mp4视频拼合
+### mp4 video stitching
 
 ```shell
 ffmpeg -i 1.mp4 -vcodec copy -acodec copy -vbsf h264_mp4toannexb 1.ts ffmpeg -i 2.mp4 -vcodec copy -acodec copy -vbsf h264_mp4toannexb 2.ts ffmpeg -i "concat:1.ts|2.ts" -acodec copy -vcodec copy -absf aac_adtstoasc output.mp4
 ```
 
-## 启用显卡支持
+
+
+### Enable Graphics Support
 
 ```bash
 ffmpge -hwaccel cuvid
 ##### GPU:
-  .\ffmpeg-win64-v4.2.2.exe -c:v h264_cuvid -i "E:\\Downloads\\0112\\The Tai-chi Maste 太极张三丰.mp4"
+  .\ffmpeg-win64-v4.2.2.exe -c:v h264_cuvid -i "E:\\Downloads\\0112\\The Tai-chi Maste qq.mp4"
       -i "E:\\GitSpace\\DeWaterMark\\watermark\\watermark1.png"
       -i "E:\\GitSpace\\DeWaterMark\\watermark\\watermark2.png"
       -filter_complex "overlay=enable='lte(t,20)':x=(W-w)/2:y=H-h:,overlay=enable='gt(mod(t,31),20)':x=W-w:y=0"
       -c:v h264_nvenc -b:v 1500k -bufsize 1500k "D:\\Downloads\\output\\output.mp4" -y
 
 ##### CPU:
- .\ffmpeg-win64-v4.2.2.exe  -i "E:\\Downloads\\0112\\The Tai-chi Maste 太极张三丰.mp4"
+ .\ffmpeg-win64-v4.2.2.exe  -i "E:\\Downloads\\0112\\The Tai-chi Maste aa.mp4"
       -i "E:\\GitSpace\\DeWaterMark\\watermark\\watermark1.png"
       -i "E:\\GitSpace\\DeWaterMark\\watermark\\watermark2.png"
       -filter_complex "overlay=enable='lte(t,20)':x=(W-w)/2:y=H-h:,overlay=enable='gt(mod(t,31),20)':x=W-w:y=0"
       -b:v 1500k -bufsize 1500k "D:\\Downloads\\output\\output.mp4" -y
+
 ```
 
-## 添加水印
+### Add Watermark
 
-* movie滤镜详解
+* Movie filters in detail
+
+  ```bash
+    ffmpeg -i inputfile -vf  "movie=masklogo,scale= 60: 30[watermask]; [in] [watermask] overlay=30:10 [out]" outfile
+  Parameter description:
+  marklogo: the image of the watermark to be added;
+  scale: the size of the watermark, the length of the watermark * the height of the watermark;
+  overlay: location of the watermark, distance from the left side of the screen * distance from the top side of the screen; mainW main video width, mainH main video height, overlayW watermark width, overlayH watermark height
+  　　Upper left corner overlay parameter is overlay=0:0
+  　　Upper right corner is overlay= main_w-overlay_w:0
+  　　Bottom right corner is overlay= main_w-overlay_w:main_h-overlay_h
+  　　Bottom left is overlay=0: main_h-overlay_h
+      The 0 on the face can be changed to 5, or 10 pixels to allow for more white space.
+  ```
+
+* Timed Text Watermark
+
+  ```bash
+  ffmpeg -re -i test.mp4 -vf "drawtext=fontsize=60:fontfile=lazy.ttf:text='{localtime\:%Y\-%m-%d %H-%M-%S}':fontcolor=green:box=1:boxcolor=yellow:enable=lt(mod(t\, 3)\, 1)" out.mp4
+  ```
+
+* Add an image watermark
+
+  ```bash
+  ffmpeg -i test.mp4 -vf "movie=logo.jpg[wm];[in][wm]overlay=30:10[out]" image_out.mp4
+  ```
+
+* Add four image watermarks
+
+  ```bash
+  ffmpeg -i in.mp4 -i logo.png -i logo.png -filter_complex "overlay=5:5, overlay=x=W-w:y=5" in_out_mul_watermark.mp4
+  ```
+* Add two watermarks and specify the location and start time of disappearance.
+  ```bash
+  # Add two watermarks, the first one is displayed in the lower center, showing time 0-20 seconds, and the second one is displayed in the upper right, showing time 20-31 seconds.
+  ffmpeg -i intput.mp4 -i watermark1.png -i watermark2.png -filter_complex "overlay=enable='lte(t,20)':x=(W-w)/2:y=H-h:,overlay=enable='gt( mod(t,31),20)':x=W-w:y=0" output.mp4 -y
+  # Same as above to add graphics card support
+  ffmpeg -hwaccel cuvid -i intput.mp4 -i watermark1.png -i watermark2.png -filter_complex "overlay=enable='lte(t,20)':x=(W-w)/2:y=H-h:,overlay =enable='gt(mod(t,31),20)':x=W-w:y=0" -vcodec h264_nvenc output.mp4 -y
+  ```
+* Add two watermarks that alternate for 10 seconds
+  ```bash
+  ffmpeg -i /root/test.mp4 -i /root/videoProcessing/youtube/test.png -i /root/test.png 
+    -filter_complex “overlay=x=if(lt(mod(t,20),10),10,NAN ):y=10,overlay=x=if(gt(mod(t,20),10),main_w-273,NAN ) :y=main_h-113,subtitles=/root/test.srt :force_style=‘Fontsize=14’” /root/test3.mp4
+    
+    Add two watermarks, overlay=x=if(lt(mod(t,20),10),10,NAN ):y=10,overlay=x=if(gt(mod(t,20),10),main_w-273,NAN ) These two use a function that represents that the watermarks are alternating.
+    mod(t,20) represents that the current time is modeled against 20;
+    lt(a,b) represents a<b, then true
+    if(true,a,b) means if true, then return a, otherwise return b
+    
+    ps:If you need to do command line splicing in your program, you must remember to escape, otherwise you will report an error.
+  ```
+### Video Splitting
 
 ```bash
-  ffmpeg -i inputfile -vf  "movie=masklogo,scale= 60: 30[watermask]; [in] [watermask] overlay=30:10 [out]" outfile
-参数说明：
-marklogo:添加的水印图片；
-scale：水印大小，水印长度＊水印的高度；
-overlay：水印的位置，距离屏幕左侧的距离＊距离屏幕上侧的距离；mainW主视频宽度， mainH主视频高度，overlayW水印宽度，overlayH水印高度
-　　左上角overlay参数为 overlay=0:0
-　　右上角为 overlay= main_w-overlay_w:0
-　　右下角为 overlay= main_w-overlay_w:main_h-overlay_h
-　　左下角为 overlay=0: main_h-overlay_h
-    面的0可以改为5，或10像素，以便多留出一些空白。
+ffmpeg -v quiet -y -i S4.mp4 -vcodec copy -acodec copy -ss 00:00:00 -t 00:07:12 -sn S01E01.mp4 -ss denotes the start time of video segmentation, -t denotes the segmentation duration
 ```
 
-* 定时文字水印
+### rm 转mp4
 
 ```bash
-ffmpeg -re -i test.mp4 -vf "drawtext=fontsize=60:fontfile=lazy.ttf:text='{localtime\:%Y\-%m-%d %H-%M-%S}':fontcolor=green:box=1:boxcolor=yellow:enable=lt(mod(t\, 3)\, 1)" out.mp4
+ffmpeg -i gdg.rmvb  -vcodec libx264 -c:v h264 -c:a aac gdg.mp4 
+silent -an : no audio encoding -vcodec : set the encoding of the video, I'm using x264 here -b : this is the bitrate -f : force to use the format -y : auto lose y confirmation
 ```
 
-* 添加一个图片水印
+### flv to MP4
 
 ```bash
-ffmpeg -i test.mp4 -vf "movie=logo.jpg[wm];[in][wm]overlay=30:10[out]" image_out.mp4
+ffmpeg -i aa！.flv  -vcodec libx264 -c:v h264 -c:a aac aa.mp4
 ```
 
-* 添加四个图片水印
-
-```bash
-ffmpeg -i in.mp4 -i logo.png -i logo.png -filter_complex "overlay=5:5, overlay=x=W-w:y=5" in_out_mul_watermark.mp4
-```
-
-* 添加两个水印 并指定位置和开始消失时间
-
-```bash
-# 添加两个水印 第一个显示在下中 显示时间0-20秒 第二个显示在 右上, 显示时间20-31秒
-ffmpeg  -i intput.mp4 -i watermark1.png -i watermark2.png -filter_complex "overlay=enable='lte(t,20)':x=(W-w)/2:y=H-h:,overlay=enable='gt(mod(t,31),20)':x=W-w:y=0" output.mp4 -y
-# 同上 添加显卡支持
-ffmpeg  -hwaccel cuvid -i intput.mp4 -i watermark1.png -i watermark2.png -filter_complex "overlay=enable='lte(t,20)':x=(W-w)/2:y=H-h:,overlay=enable='gt(mod(t,31),20)':x=W-w:y=0" -vcodec h264_nvenc output.mp4 -y
-```
-
-* 添加两个水印，10秒交替出现
-
-```bash
-ffmpeg -i /root/test.mp4 -i /root/videoProcessing/youtube/test.png -i /root/test.png 
-  -filter_complex “overlay=x=if(lt(mod(t,20),10),10,NAN ):y=10,overlay=x=if(gt(mod(t,20),10),main_w-273,NAN ) :y=main_h-113,subtitles=/root/test.srt :force_style=‘Fontsize=14’” /root/test3.mp4
-  
-  添加两个水印，overlay=x=if(lt(mod(t,20),10),10,NAN ):y=10,overlay=x=if(gt(mod(t,20),10),main_w-273,NAN ) 这两个使用了函数，代表是交替出现水印。
-  mod(t,20)代表当前时间对20进行取模；
-  lt(a,b)表示的是a<b，则为true
-  if(true,a,b)表示的是如果为true，则返回a，否则返回b
-  
-  ps:如果需要在程序中进行命令行的拼接，一定要记得转义，否则会报错。
-```
-
-## 视频分割
-
-```bash
-ffmpeg -v quiet -y -i S4.mp4 -vcodec copy -acodec copy -ss 00:00:00 -t 00:07:12 -sn S01E01.mp4 -ss 表示视频分割的起始时间，-t 表示分割时长
-```
-
-## rm 转mp4
-
-```bash
-ffmpeg -i 郭德纲.rmvb  -vcodec libx264 -c:v h264 -c:a aac 郭德纲.mp4 
-无声 -an : 不编码音频 -vcodec : 设置视频的编码，我这里使用的是x264 -b : 这个是码率 -f : 强制使用格式 -y : 自动输y确认
-ffmpeg -i 没事偷着乐HD1024高清国语.rmvb -c:v libx264 -strict -2 没事偷着乐HD1024高清国语.mp4
-```
-
-## flv 转MP4
-
-```bash
-ffmpeg -i 【AE教程】月有阴晴圆缺，这个特效，推荐你一定要看！.flv  -vcodec libx264 -c:v h264 -c:a aac 月.mp4
-```
-
-## 批量处理视频
+##### Batch Processing Video
 
 ```bash
 for %%G in (*.rmvb) do ffmpeg -i "%%~G" -c:v h264 -c:a aac "%%~nG.mp4" for %%G in (*.rm) do ffmpeg -i "%%~G" -c:v h264 -c:a aac "%%~nG.mp4"
 ```
 
-## 其他格式转MP3脚本
+### Other formats to MP3 scripts
 
-```bash
+```
 @echo off & title
 cd /d %~dp0
 for %%a in (*.m4a) do (
- echo 正在转换：%%a
+ echo Conversion in progress：%%a
  ffmpeg -i "%%~sa" -y -acodec libmp3lame -aq 0 "output\%%~na.mp3"
 )
 pause
 ```
 
-## MP4批量转换文件
+### MP4 Batch Convert Files
 
 ```shell
 @echo off
 
-::在下方设置要处理的视频或音频格式，这里列出了一些主要的视频格式
+::Set the video or audio format to be processed below, some of the major video formats are listed here
 set Ext=*.avi,*.mp4,*.wmv,*.flv,*.mkv,*.rmvb,*.rm,*.3gp,*.ts
 
 md output
 
-echo 开始视频转换
+echo Start video conversion
 
-::在下方设置输出格式，这里输出为mp4，可自行更改
+::Set the output format at the bottom, here the output is mp4, you can change it by yourself
 for %%a in (%Ext%) do (
-	echo 正在转换：%%a
+	echo Conversion in progress：%%a
 	ffmpeg -loglevel quiet -i "%%a" -f mp4 "output\%%~na.mp4" -y
 )
 
-echo 转换完成
+echo Conversion complete
 
 pause
 ```
 
-## 视频压缩
+### video compression
 
-![](https://s2.loli.net/2023/07/23/jiJu5TCVg28LvlH.png)
+1. ###### View Video Parameters
 
-```python
-ffmpeg -i 1274.mp4 -b 600k 12.mp4
--b    数据比特率，每秒传输的数据流量大小（kb/s），这个命令里设置的比特率是600k 也就是原来视频的八分之一
-```
+   * ![](https://s2.loli.net/2023/07/23/jiJu5TCVg28LvlH.png)
+
+2. ```python
+   ffmpeg -i 1274.mp4 -b 600k 12.mp4
+   -b    Data bit rate, the size of data traffic transmitted per second (kb/s), the bit rate set in this command is 600k, which is one-eighth of the original video.
+   ```
+
+‍
+
