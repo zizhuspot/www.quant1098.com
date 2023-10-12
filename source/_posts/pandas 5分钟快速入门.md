@@ -1,334 +1,575 @@
 ---
-title: pandas 5-minute quickstart
-date: 2023-07-22 16:44:00
+title: python 5 minute quickstart
+date: 2023-07-22 09:25:00
 categories:
   - Quantitative Trading
-tags: 
-  - Quantitative trading
+tags: Quantitative trading
+  - Quantitative Trading
   - python
   - Getting Started
-  - pandas
-  - pandas
+  - Quick Start
+  - Basics
   - 5 minutes
-description: This article is not suitable for python language has no basis for friends, suitable for language foundation or use a period of time python language but some of the syntax is a bit fuzzy friends, you can use this document as a pandas usage memo, at any time to check some fuzzy or memory is not too solid place
-cover: https://s2.loli.net/2023/07/22/LgZKXF3PUYpxjkf.jpg
+description: 'This document is not suitable for those who do not have a basic knowledge of python, it is suitable for those who have a basic knowledge of the language or have used python for some time but some of the syntax is a bit fuzzy, you can use this document as a memo, you can always refer to some of the fuzzy or not too solid to memorize the place '
+cover: https://s2.loli.net/2023/07/24/7YKgcPjuiUDeRoL.webp
 ---
 
-## Importing the pandas library
+## Introduction
+
+This document is just a simple introduction to syntax stacking, not for those who have no basic knowledge of programming, but for those who have a basic knowledge of the language or have been using python for a while but some of the syntax is a bit vague, you can use this document as a reminder to refer to some of the ambiguities or not too solid in memory.
+
+Similarly, this article is not going to spend time on installing the programming language environment or installing and setting up the editor, as you will be able to solve these problems by default, or have already done so.
+
+This article is written in python3, most of the examples are available in python2, and the few statements that don't work are no longer supported by the language or have been changed to a more elegant way of writing them.
+
+Let's get started.
+
+## Annotations and printouts
 
 ```python
-import pandas as pd  # To import pandas as a third-party library, we usually give pandas an alias called pd
-pd.set_option('expand_frame_repr', False)  # No line breaks when there are too many columns
+# Single-line comments
+
+""" 
+Multi-line strings can be wrapped in
+    three quotes, but this can also be treated as a
+    multi-line comment
+"""
+# print("hello world!") # => output hello world!
+print("hello world!") # => output hello world! 
 ```
 
-## Import data
+## Data types and operators
+
+### I Number types and related operations
 
 ```python
-df = pd.read_csv(
-        # This parameter is the path of the data in the computer
-        filepath_or_buffer = 'BITFINEX_BTCUSD_20180124_1T.csv',
-        # This parameter represents the separator for the data, the default for csv files is a comma. Other common ones are '\t'
-        sep=',', # This parameter represents skipping the data file.
-        # This parameter means skip the first line of the data file and do not read it in.
-        skiprows=1, # nrows.
-        # nrows, only read the first n lines of data, if not specified, read all the data.
-        nrows=15, # Read only the first n rows of data, if not specified, read all data.
-        # Recognizes the data in the specified column as a date. If not specified, time data will be read in as a string. Don't use it at first.
-        parse_dates=['candle_begin_time'], # Read all the data.
-        # Set the specified column to index. if not specified, index defaults to 0, 1, 2, 3, 4...
-        index_col=['candle_begin_time'], # Set the specified columns to index.
-        # Read the specified columns, no other data will be read. If not specified, read all columns
-        # usecols=['candle_begin_time', 'close'], # Read the data in the specified columns.
-         When set to False, no error is reported and the row is skipped. Use this when the data is dirty.
-        # error_bad_lines=False.
-        # Recognize nulls in data as nulls.
-        # na_values='NULL', # identify nulls in the data as nulls.
+# Number types
+4 # => 4
 
-        # More other parameters, please directly search for "pandas read_csv", to go through them one by one. The more important ones, header, etc.
-    )
+# Simple arithmetic
+1 + 2 # => 3
+8 - 2 # => 6
+10 * 3 # => 30
+35 / 7 # => 5
+
+# Division of integers is automatically rounded
+5 / 3 # => 1
+
+# To do exact division, we need to introduce floating point numbers
+3.0 # Floating point numbers
+13.0 / 4.0 # => 3.25 Much more precise.
+
+# Parentheses have the highest priority
+(1 + 4) * 2 # => 10
 ```
 
-![](https://s2.loli.net/2023/07/22/PBgx5VXL3QSaquh.png)
-
-The use of read_csv import data is very convenient, the data type of the imported data is DataFrame. import data using the read series of functions and read_table, read_excel, read_json, etc., the content of their parameters are similar to each other, you can search for their own view.
-
-## View Data
+### II Boolean data types
 
 ```python
-print(df.shape) # Output how many rows and columns the dataframe has.
-print(df.shape[0]) # Take the number of rows, and the corresponding number of columns is df.shape[1].
-print(df.columns) # Output the name of each column in order, demonstrating how to traverse with a for statement.
-print(df.index) # Outputs the name of each row in order, which can be traversed with a for statement.
-print(df.dtypes) # Each column of data has a different type, such as numbers, strings, dates, etc. This method outputs each column's variable type. This method outputs each column variable type
-print(df.head(3)) # Look at the first 3 rows of data, default is 5. Very close to natural language
-print(df.tail(3)) # Look at the last 3 rows of data, default is 5.
-print(df.sample(n=3)) # randomly pick 3 rows, use frac parameter if you want to go to a fixed ratio
-print(df.describe()) # Very handy function to get a visual sense of each column of data; will only work for numeric columns
+True
+False
+
+# Use not to fetch nots
+not True # => False
+not False # => True
+
+# Equal
+2 == 2 # => True
+3 == 1 # => False
+
+# Not equal
+4 ! 4 ! == 4 # => False
+5 ! = 6 # => True
+
+# More comparison operators
+1 < 12 # => True
+1 > 9 # => False
+4 <= 4 # => True
+6 >= 6 # => True
+
+# Comparison operations can be written concatenated!
+2 < 3 < 4 # => True
+3 < 4 < 3 # => False
 ```
 
-## data correction
+## String types and operations
 
 ```python
-# 对print出的数据格式进行修正
-pd.set_option('expand_frame_repr', False)  # 当列太多时不换行
-pd.set_option('max_colwidth', 1)  # 设定每一列的最大宽度，恢复原设置的方法，pd.reset_option('max_colwidth')
-pd.set_option("display.max_rows", 100)  # 设定显示最大的行数
-pd.set_option('precision', 6)  # 浮点数的精度
-print(df.head())
+# The string needs to be enclosed in " or '
+"Hello world!"
+'Hello world!'
 
-# 更多设置请见http://pandas.pydata.org/pandas-docs/stable/options.html
+# String is enclosed in a plus sign
+"Hello " + "world!" # => "Hello world!"
+
+# String can be treated as a list of characters
+"Hello world!"[0] # => 'H'
+
+# % can be used to format strings
+"%s can be %s" % ("Hello", "world!")
+
+# Strings can also be formatted using the format method.
+# It is recommended to use this method
+"{0} can be {1}".format("strings", "formatted")
+# You can also replace numbers with variable names
+"{name} wants to eat {food}".format(name="Bob", food="lasagna")
+
+# The method now more commonly used with the f argument
+name, food = "Bob", "lasagna"
+f"{name} wants to eat {food}"
+
+# None is an object
+None # => None
+
+# Don't use the equality `==` symbol to compare with None.
+# Use `is`.
+"etc" is None # => False
+None is None # => True
+
+# 'is' can be used to compare objects for equality
+# This operator is not very useful for comparing raw data, but is essential for comparing objects.
+
+# None, 0, and the empty string are counted as False
+# Everything else is True
+0 == False # => True
+"" == False # => True
 ```
 
-## Selects the specified data
+## Variables and collections
+
+Collections are mainly lists, lists, dictionaries, dicts and tuples. As for arrays, which are used in machine learning, they can be ignored for the time being because they are basically pandas DataFarmes data structures in python quantization.
+
+### I Variable
 
 ```python
-# ===== how to pick specified rows, columns
-print(df['open']) # pick based on column name, read data is Series type
-print(df[['candle_begin_time', 'close']]) # Select multiple columns at the same time, need two brackets, the data read is DataFrame type
+# There is no need to declare a variable before assigning it a value.
+some_var = 5 # It is generally recommended to use a combination of lowercase letters and underscores for variable names.
+some_var # => 5
 
-# loc operation: read data by label (name of columns and index)
-print(df.loc['2018-01-24 00:01:00']) # select a specified row, the data read is Series type
-print(df.loc[['2018-01-24 00:01:00', '2018-01-24 00:04:00']]) # Pick the specified two rows
-print(df.loc['2018-01-24 00:01:00': '2018-01-24 00:06:00']) # pick multiple rows in this range, similar to the slice operation in list, the data read is of DataFrame type
-print(df.loc[:, 'open':'close']) # Select multiple columns in this range, the data read is of type DataFrame
-print(df.loc['2018-01-24 00:01:00': '2018-01-24 00:05:00', 'open':'close']) # Read the specified multiple rows and columns. Before the comma is the range of rows, after the comma is the range of columns. The data to be read is of type DataFrame
-print(df.loc[:, :]) # Read all rows, all columns, data read is DataFrame type
-print(df.at['2018-01-24 00:01:00', 'open']) # Use at to read one of the specified elements. loc works too, but at is more efficient.
+# An exception is thrown when accessing an unassigned variable.
+# See the section on control flow to see how exceptions are handled.
+some_other_var # throws NameError
 
-# iloc operation: read data by position
-print(df.iloc[0]) # Pick a row by index, read data is Series type.
-print(df.iloc[1:3]) # select multiple rows in this range, the data read is of type DataFrame
-print(df.iloc[:, 1:3]) # select multiple columns in this range, the data read is of type DataFrame
-print(df.iloc[1:3, 1:3]) # read the specified multiple rows and columns, the data read is of type DataFrame
-print(df.iloc[:, :]) # Read all rows, all columns, the data read is of type DataFrame
-print(df.iat[1, 1]) # Use iat to read a specified element. Using iloc works too, but iat is more efficient.
+# The if statement can be used as an expression
+"yahoo!" if 3 > 2 else 2 # => "yahoo!"
 ```
 
-## column operation
+
+
+### II List Related Operations
 
 ```python
-# rows and columns add, subtract, multiply and divide
-print('January 24, 2018' + df['BST']) # String columns can be directly added to strings to operate on whole columns
-print(df['close'] * 100) # Numeric columns can be added or multiplied directly to operate on whole columns.
-print(df[['close', 'volume']])
-print(df['close'] * df['volume']) # The two columns can be manipulated directly between them. What is the closing price * volume calculated?
-# Add a new column
-df['BST2'] = 'January 24, 2018' + df['BST']
-df['exchange'] = 'bitfinex'
+# A list is used to hold sequences
+li = []
+# Lists can be initialized directly
+other_li = [4, 5, 6]
+
+# Add elements to the end of the list
+li.append(1) # li is now [1]
+li.append(2) # li now is [1, 2]
+li.append(4) # li now is [1, 2, 4]
+li.append(3) # li now is [1, 2, 4, 3]
+# Remove the end of the list
+li.pop() # => 3 li is now [1, 2, 4]
+# Add it back in
+li.append(3) # li is now [1, 2, 4, 3] again.
+
+# Access the list as you would an array in any other language.
+li[0] # => 1
+# Access the last element
+li[-1] # => 3
+
+# Throw an exception for out-of-bounds.
+li[4] # throws an out-of-bounds exception
+
+# Slicing syntax requires indexed access to lists.
+# Think of it as left-closed-right-open intervals in math
+li[1:3] # => [2, 4]
+# Omit the first element
+li[2:] # => [4, 3]
+# Omit the last element
+li[:3] # => [1, 2, 4]
+
+# Delete specific elements
+del li[2] # li is now [1, 2, 3]
+
+# Merge the lists
+li + other_li # => [1, 2, 3, 4, 5, 6] - doesn't leave the two lists unchanged
+
+# Merge the lists by splicing
+li.extend(other_li) # li is [1, 2, 3, 4, 5, 6]
+
+# Use in to return whether an element is in the list or not
+1 in li # => True
+
+# Returns the length of the list
+len(li) # => 6
 ```
 
-## statistical function
+
+
+### III Dictionary-related operations
 
 ```python
-# ===== statistics function
-print(df['close'].mean()) # Finds the mean of an entire column, returning a number. Null values are automatically excluded.
-print(df[['close', 'volume']].mean()) # Find the mean of two columns, return two numbers, Series
-print(df[['close', 'volume']])
-print(df[['close', 'volume']].mean(axis=1)) # Find the mean of two columns, return DataFrame. axis=0 or 1 to be clear.
-# axis=1, on behalf of the operation on the whole several columns. axis=0 (default) on behalf of the operation on several rows. It's normal to get confused in practice, just try it out.
+# Dictionaries are used to store mapping relationships
+empty_dict = {}
+# Dictionary initialization
+filled_dict = {"one": 1, "two": 2, "three": 3}
 
-print(df['high'].max()) # Maximum value.
-print(df['low'].min()) # min value
-print(df['close'].std()) # standard deviation
-print(df['close'].count()) # number of non-empty data
-print(df['close'].median()) # median
-print(df['close'].quantile(0.25)) # 25% quantile
-# There are other functions to calculate other metrics, so you can search for them yourself if you encounter them in practice.
+# Dictionaries are also accessed with middle brackets
+filled_dict["one"] # => 1
+
+# Save all the keys in the list
+filled_dict.keys() # => ["three", "two", "one"]
+# The order of the keys is not unique, what you get is not necessarily in that order
+
+# Save all the values in the list
+filled_dict.values() # => [3, 2, 1]
+# Same order as the keys
+
+# Determine if a key exists
+"one" in filled_dict # => True
+1 in filled_dict # => False
+
+# Querying for a non-existent key throws a KeyError
+filled_dict["four"] # KeyError
+
+# Use the get method to avoid KeyError
+filled_dict.get("one") # => 1
+filled_dict.get("four") # => None
+# The get method supports returning a default value if none exists.
+filled_dict.get("one", 4) # => 1
+filled_dict.get("four", 4) # => 4
+
+# setdefault is a safer way to add a dictionary element
+filled_dict.setdefault("five", 5) # filled_dict["five"] has a value of 5
+filled_dict.setdefault("five", 6) # filled_dict["five"] still has value 5
 ```
 
-## Shift-like functions, ways to delete columns
+
+
+### IV Tuple Related Operations
 
 ```python
-# =====shift class function, way to delete columns
-df['next cycle close'] = df['close'].shift(-1) # Read the data of the previous row, if the parameter is set to 3, it is to read the data of the last three rows; if the parameter is set to -1, it is to read the data of the next row;
-del df['next cycle close'] # method to delete a column
+# A tuple is similar to a list, but it is immutable
+tup = (1, 2, 3)
+tup[0] # => 1
+tup[0] = 3 # type error
 
-df['up or down'] = df['close'].diff(-1) # find the value obtained by subtracting the data in this row from the data in the previous row
-print(df[['close', 'up/down']])
-df.drop(['close', 'close']], axis=1, inplace=True) # another way to delete a column, inplace parameter means whether to replace the original df or not
+# For most list operations, this also applies to tuples
+len(tup) # => 3
+tup + (4, 5, 6) # => (1, 2, 3, 4, 5, 6)
+tup[:2] # => (1, 2)
+2 in tup # => True
 
-df['up/down'] = df['close'].pct_change(1) # similar to diff, but the ratio of the two numbers is the equivalent of the up/down ratio
+# You can unwrap a tuple and assign it to multiple variables
+a, b, c = (1, 2, 3) # a is 1, b is 2, c is 3
+# Without parentheses, they are automatically treated as tuples
+d, e, f = 4, 5, 6
+# Now we can see how easy it is to exchange two numbers
+e, d = d, e # d is 5, e is 4
 
-# =====cum(cumulative)-like function
-df['volume_cum'] = df['volume'].cumsum() # The cumulative value of the column
-print(df[['volume', 'volume_cum']])
-print((df['volume'] + 1.0).cumsrod()) # Cumulative value of the column, here the calculation is the money curve, assuming an initial 1$
 ```
 
-## Other column functions
+### V. Collections
 
 ```python
-# ===== other column functions
-df['close_rank'] = df['close'].rank(ascending=True, pct=False) # Output the rank. ascending parameter represents whether it's sequential or inverse. pct parameter represents whether the output is ranked or a percentage of ranked
-print(df[['close', 'close_rank']])
-del df['close_rank']]
-print(df['close'].value_counts()) # Count. Counts the number of times each element in the column appears. The data returned is Series
+# Sets store unordered elements
+empty_set = set()
+# Initialize a set
+some_set = set([1, 2, 2, 3, 4]) # some_set is now set([1, 2, 3, 4])
+
+# After Python 2.7, curly braces can be used to represent sets
+filled_set = {1, 2, 2, 3, 4} # => {1 2 3 4}
+
+# Add elements to the set
+filled_set.add(5) # filled_set is now {1, 2, 3, 4, 5}
+
+# Use & to compute the intersection of sets
+other_set = {3, 4, 5, 6}
+filled_set & other_set # => {3, 4, 5}
+
+# Use | to compute the union of sets
+filled_set | other_set # => {1, 2, 3, 4, 5, 6}
+
+# Use - to compute the difference of sets
+{1, 2, 3, 4} - {2, 3, 5} # => {1, 4}
+
+# Use in to determine if an element exists in the set
+2 in filled_set # => True
+10 in filled_set # => False
 ```
 
-## Data filtering 
+
+
+### VI Lists, dictionaries, tuples, collections, and similarities and differences between them.
+
+1. Similarities: Both are built-in Python data structures that can encapsulate and manipulate multiple data.
+2. Differences.
+3. - list: an ordered variable sequence, elements can be added, deleted and modified.
+   - Dictionary (dict): unordered key-value pairs, the key can not be repeated, you can add and delete key-value pairs, the value can be modified.
+   - Set (set): an unordered set of non-repeating elements, you can add and delete elements, but the elements can not be modified.
+   - Lists and tuples are sequences, dictionaries and sets are maps.
+   - Lists and tuples store elements sequentially, dictionaries and sets are not sequential.
+   - Lists and dictionaries have mutable elements, tuples and collections have immutable elements.
+   - Dictionaries are stored as key-value pairs, while the other three store only values.
+   - Sets do not allow duplicate elements, while the other three do.
+
+In summary, they are different in terms of mutability, ordering, and whether they contain key-value, etc., so you need to choose the right type according to the specific usage scenario.
+
+## Process control
+
+### 一 if...elif...else
 
 ```python
-# ===== Filtering operation to filter out relevant data based on specified conditions.
-print(df['symbol'] == 'AIDBTC') # Determine if the pair code is equal to BTCUSD
-print(df[df['symbol'] == 'BTCUSD']) # Output that will be judged as True: pick the rows where the pair code is equal to BTCUSD
-print(df[df['symbol'] == 'BTCUSD'].index) # output the index of the row judged True
-print(df[df['symbol'].isin(['BTCUSD', 'LTCUSD', 'ETHUSD'])]) # pick rows with code equal to 'BTCUSD' or 'LTCUSD ' or 'ETHUSD'
-print(df[df['close'] < 10.0]) # Pick rows with a close less than 10
-print(df[(df['close'] < 10.0) & (df['symbol'] == 'AIDUSD')]) # Two conditions, or if it is |
+# Create a new variable
+some_var = 5
+
+# This is an if statement, indentation is important in python.
+# The following code snippet will output "some var is smaller than 10"
+if some_var > 10.
+    print "some_var is totally bigger than 10."
+elif some_var < 10: # This elif statement is not required.
+    print "some_var is smaller than 10." else: # This else is also not required.
+else: # This else is also not required
+    print "some_var is indeed 10."
 ```
 
-## Missing value handling
+### 二 for
 
 ```python
-# ===== Missing value handling: there are missing values in the raw data, how to handle them?
-# Create missing values
-index = df[df['candle_begin_time'].isin(['2018-01-24 00:00:00', '2018-01-24 12:00:00'])].index
-df.loc[index, '12 hours'] = df['candle_begin_time']
-
-# Drop the missing values
-print(df.dropna(how='any')) # Remove rows with null values. how='any' means, as long as there is a null value in the row, it will be removed, can be changed to all.
-print(df.dropna(subset=['12 hours', 'close'], how='all')) # The subset parameter specifies that null values are judged in a particular column.
-# all means all are null before the row is deleted; any deletes the row as long as one is null.
-
-# Fill in missing values
-print(df.fillna(value=0)) # Directly assign missing values to fixed values
-# df['12 hours'].fillna(value=df['close'], inplace=True) # Directly assign missing values to other columns of data
-print(df)
-print(df.fillna(method='ffill')) # Find the nearest non-null value upwards and fill the missing position with that value, called forward fill, very useful
-print(df.fillna(method='bfill')) # look down to the nearest non-null value and fill the true position with that value, known as backward fill
-
-# Find the missing value
-print(df.notnull()) # Determine if it is null, reverse function isnull()
-print(df[df['12 hours'].notnull()]) # Output the line with '12 hours' listed as null
+"""
+Iterate through the list with a for loop
+Output.
+    dog is a mammal
+    cat is a mammal
+    mouse is a mammal
+"""
+for animal in ["dog", "cat", "mouse"].
+    # You can format strings with %
+    print "%s is a mammal" % animal
+    
+"""
+`range(number)` Returns a list of numbers from 0 to the given number.
+Output.
+    0
+    1
+    2
+    3
+for i in range(4):
+    print i
 ```
 
-## sorting function
+
+
+### 三 while
 
 ```python
-print(df.sort_values(by=['candle_begin_time'], ascending=0)) # The by parameter specifies what to sort by, and the ascending parameter specifies whether it's sequential or inverse, 1 sequential, 0 inverse
-print(df.sort_values(by=['symbol', 'candle_begin_time'], ascending=[0, 0])) # sort by multiple columns
+"""
+while loop
+Output: 0
+    0
+    1
+    2
+    3
+"""
+x = 0
+while x < 4.
+    print x
+    x += 1 # shorthand for x = x + 1
 ```
 
-## Data consolidation
+### 四 try... except
 
 ```python
-# ===== two df up and down merge operations, append operations
-df1 = df.iloc[0:10][['candle_begin_time', 'symbol', 'close', 'volume']]
-print(df1)
-df2 = df.iloc[5:15][['candle_begin_time', 'symbol', 'close', 'volume']]
-print(df2)
-print(df1.append(df2)) # append operation to splice df1 and df2 up and down. Watch the index after the append. index can be repeated
-df3 = df1.append(df2, ignore_index=True) # ignore_index parameter, user re-determines index.
-print(df3)    
+# Handling exceptions with try/except blocks
+try.
+    # Throw an exception with raise
+    raise IndexError("This is an index error")
+except IndexError as e: # pass
+    pass # pass means do nothing, but usually some recovery work is done here
 ```
 
-## Data de-duplication
+
+
+## Functions
+
+### Regular functions ###
 
 ```python
-# ===== de-duplicating data
-# There are duplicate rows in df3, how do we get rid of the duplicates?
-df3.drop_duplicates(
-subset=['candle_begin_time', 'symbol'], # The subset parameter is used to specify the class of data based on which to determine if it is duplicated. If not specified, all columns will be used to determine duplicates.
-keep='first', # When removing duplicates, do we keep the top row or the bottom row? first keeps the top row, last keeps the bottom row, False keeps none of the rows.
-inplace=True)
-print(df3)
+# Use def to create a new function
+def add(x, y).
+    print "x is %s and y is %s" % (x, y)
+    return x + y # Return values by return
+
+# Call a function with parameters
+add(5, 6) # => output "x is 5 and y is 6" return 11
+
+# Call a function by keyword assignment
+add(y=6, x=5) # The order doesn't matter.
+
+# We can also define functions that accept multiple variables that are in order
+def varargs(*args).
+    return args
+
+varargs(1, 2, 3) # => (1,2,3)
+
+
+# We can also define functions that accept multiple variables, ordered by keyword
+def keyword_args(**kwargs):
+    return kwargs
+
+# The actual effect:
+keyword_args(big="foot", loch="ness") # => {"big": "foot", "loch": "ness"}
+
+# You can also define a function in both forms at the same time
+def all_the_args(*args, **kwargs):
+    print args
+    print kwargs
+"""
+all_the_args(1, 2, a=3, b=4) prints.
+    (1, 2)
+    {"a": 3, "b": 4}
+"""
+
+# When calling a function, we can also do the opposite, expanding tuples and dictionaries into arguments
+args = (1, 2, 3, 4)
+kwargs = {"a": 3, "b": 4}
+all_the_args(*args) # Equivalent to foo(1, 2, 3, 4)
+all_the_args(**kwargs) # equivalent to foo(a=3, b=4)
+all_the_args(*args, **kwargs) # Equivalent to foo(1, 2, 3, 4, a=3, b=4)
+
+# Functions are first class citizens in python
+def create_adder(x).
+    def adder(y).
+        return x + y
+    return adder
+
+add_10 = create_adder(10)
+add_10(3) # => 13
+
 ```
 
-## Other Important Functions
+
+
+### anonymous function
 
 ```python
-# ===== other common and important functions
-df.reset_index(inplace=True, drop=False) # reset index
-print(df.rename(columns={'close': 'close', 'open': 'open'})) # The rename function changes the name of the variable. The name to be changed is passed to the columns parameter using dict
-print(df.empty) # Determine if a df is empty.
-print(pd.DataFrame().empty) # pd.DataFrame() creates an empty DataFrame.
-print(pd.DataFrame().empty) # pd.DataFrame() creates an empty DataFrame, output here is empty
+# anonymous function
+(lambda x: x > 2)(3)  # => True
 ```
 
-## string processing (computing)
+
+
+### Built-in higher-order functions
 
 ```python
-# ===== string processing
-print(df['symbol'])
-print('BTCUSD'[:3])
-print(df['symbol'].str[:3])
-print(df['symbol'].str.upper()) # After adding str you can use common string functions to manipulate the whole columns
-print(df['symbol'].str.lower())
-print(df['symbol'].str.len()) # Calculate the length of the string, length
-df['symbol'].str.strip() # strip operation, remove spaces on both sides of the string
-print(df['symbol'])
-print(df['symbol'].str.contains('AID')) # Determine whether a string contains certain characters or not
-print(df['symbol'].str.replace('AID', 'AVT')) # do replacement, replace sz with sh
-# # For more string functions see: http://pandas.pydata.org/pandas-docs/stable/text.html#method-summary
+# Built-in higher-order functions
+map(add_10, [1, 2, 3])  # => [11, 12, 13]
+filter(lambda x: x > 5, [3, 4, 5, 6, 7])  # => [6, 7]
 ```
 
-## time handling
+
+
+### advanced technique
 
 ```python
-# ===== time processing
-print(df['candle_begin_time'])
-print(df.at[0, 'candle_begin_time'])
-print(type(df.at[0, 'candle_begin_time']))
-df.rename(/)
-df['candle_begin_time'] = pd.to_datetime(df['candle_begin_time']) # change transaction date from string to time variable
-print(df.at[0, 'candle_begin_time'])
-print(type(df.at[0, 'candle_begin_time']))
-
-print(pd.to_datetime('January 11, 1999')) # pd.to_datetime function: transforms strings into time variables
-print(df['candle_begin_time'])
-print(df['candle_begin_time'].dt.year) # Output the year for this date. The corresponding month is the month, day is the day, and hour, minute, second
-print(df['candle_begin_time'].dt.week) # What week of the year is this day
-print(df['candle_begin_time'].dt.dayofyear) # What day of the year is this?
-print(df['candle_begin_time'].dt.dayofweek) # This day is the first day of the week, with 0 being Monday
-print(df['candle_begin_time'].dt.dayofweek) # Same function as above, but more commonly used
-print(df['candle_begin_time'].dt.weekday_name) # Same function as above, returns the day of the week in English, used for reports.
-print(df['candle_begin_time'].dt.days_in_month) # how many days in the month this day is in
-print(df['candle_begin_time'].dt.is_month_start) # Is this day the beginning of the month and is there an is_month_end?
-print(df['candle_begin_time'] + pd.Timedelta(hours=1)) # add a day, Timedelta is used to represent time difference data, [weeks, days, hours, minutes, seconds, milliseconds, microseconds, nanoseconds microseconds, nanoseconds]
-print((df['candle_begin_time'] + pd.Timedelta(days=1)) - df['candle_begin_time']) # add a day then subtract today's date
+# You can use list methods to make more subtle references to higher-order functions
+[add_10(i) for i in [1, 2, 3]]  # => [11, 12, 13]
+[x for x in [3, 4, 5, 6, 7] if x > 5]  # => [6, 7]
 ```
 
-## Rolling, expanding operations
+
+
+## Classes
+
+### Class inheritance
 
 ```python
-# =====rolling, expanding operations
-# Calculate the mean of the column 'close'
-print(df['close'])
-# How do I get the average of the last 3 days of close for each day? i.e. how to calculate the common moving average?
-# Use the rolling function
-df['close_3-day_mean'] = df['close'].rolling(3).mean()
-print(df[['close', 'close_3_day_mean']])
-rolling(n) means to take the last n rows of data, only calculate the n rows of data. Can be followed by various types of calculation functions, such as max, min, std, etc.
-print(df['close'].rolling(5).max())
-print(df['close'].rolling(3).min())
-print(df['close'].rolling(3).std())
+# Our new class inherits from the object class.
+class Human(object).
 
-# rolling can calculate the average of the last 3 days for each day, what should I do if I want to calculate the average of each day from the beginning to the present?
-# Use expanding operation
-df['close_to_date_mean'] = df['close'].expanding().mean()
-print(df[['close', 'close_to_date_mean']])
+     # Class attribute, shared by all objects of the class
+    species = "H. sapiens"
 
-# expanding means taking the data from the beginning to the present. This can be followed by all sorts of math functions
-print(df['close'].expanding().max())
-print(df['close'].expanding().min())
-print(df['close'].expanding().std())
+    # Basic constructor
+    def __init__(self, name).
+        # Assign parameters to object member attributes
+        self.name = name
 
-# rolling and expanding are simply tailor-made methods for the quantitative domain and are often used.
+    # Member method with self as argument
+    def say(self, msg): # Return "%s: %s" % (self.name).
+        return "%s: %s" % (self.name, msg)
+
+    # Class methods are shared by all objects of the class
+    # This class method passes the class itself as the first parameter when it is called
+    @classmethod
+    def get_species(cls):: return cls.species(cls).
+        return cls.species
+
+    # Static methods are methods that don't require a reference to a class or an object to be called.
+    @staticmethod
+    def grunt(): return "*grunt*
+        return "*grunt*"
 ```
 
-## exports
+
+
+### Use of Classes
 
 ```python
-# ===== output to local file
-print(df)
-df.to_csv('output.csv', index=False)
+
+# Instantiate a class
+i = Human(name="Ian")
+print i.say("hi") # output "Ian: hi"
+
+j = Human("Joel")
+print j.say("hello") # output "Joel: hello"
+
+# Access the methods of the class
+i.get_species() # => "H. sapiens"
+
+# Change the shared properties
+Human.species = "H. neanderthalensis"
+i.get_species() # => "H. neanderthalensis"
+j.get_species() # => "H. neanderthalensis"
+
+# Access static variables
+human.grunt() # => "*grunt*"
 ```
 
-## The Complete List of Functions
 
-Where can I see all the functions?
 
-http://pandas.pydata.org/pandas-docs/stable/api.html 
+## module 
+
+```python
+# We can import other modules
+import math
+print math.sqrt(25) # => 5
+
+# We can also import specific functions from a module
+from math import ceil, floor
+print ceil(4.7) # => 5.0
+print floor(4.7) # => 4.0
+
+# Import all functions from a module
+# Warning: not recommended
+from math import *
+
+# Shorten the module name
+import math as m
+math.sqrt(16) == m.sqrt(16) # => True
+
+# Python modules are really just normal python files.
+# You can also create your own modules and import them.
+# The module name is the same as the file name.
+
+# You can also see what properties and methods are in a module by doing the following
+import math
+dir(math)
+```
+
+
 
 
 
