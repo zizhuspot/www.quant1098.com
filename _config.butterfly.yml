@@ -232,7 +232,7 @@ aside:
     category: true
   card_author:
     enable: true
-    description: 探索技术、科学和文化的无限可能性
+    description: Exploring the infinite possibilities of technology, science and culture
     button:
       enable: true
       icon: fab fa-github
