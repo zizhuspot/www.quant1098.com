@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 草原的博客
-subtitle: 探索技术、科学和文化的无限可能性
-description: 欢迎来到草原的博客！这里是一个关于科技、创新和未来的社区。草原的博客致力于探讨各种各样的主题，包括加密货币、人工智能、机器学习、区块链、虚拟现实和物联网等。
+title: CaoYuan's Blog
+subtitle: Exploring the infinite possibilities of quantitative trading, technology, science and culture
+description: Welcome to the CaoYuan's blog! This is a community about technology, innovation and the future. Prairie's blog is dedicated to a wide variety of topics including quantitative trading, cryptocurrencies, artificial intelligence, machine learning, blockchain, virtual reality, and the Internet of Things.
 keywords:
-  - 加密货币
-  - 人工智能
-  - 机器学习
-  - 区块链
-  - 虚拟现实
-  - 物联网
-author: CY
+  - Cryptocurrency
+  - Artificial Intelligence
+  - Machine Learning
+  - Blockchain
+  - Virtual Reality
+  - Internet of Things
+author: CaoYuan
 language: en
 timezone: Asia/Hong_Kong
 
