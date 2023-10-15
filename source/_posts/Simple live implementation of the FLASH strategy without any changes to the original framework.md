@@ -1,14 +1,26 @@
 ---
-title: FLASH策略的简易实盘实现，无需更改任何原有框架
-date: 2023-08-14T18:12:35Z
-lastmod: 2023-08-14T18:17:25Z
+title: Simple live implementation of the FLASH strategy without any changes to the original framework
+date: 2023-10-15 17:07:00
+categories:
+  - quantitative trading
+tags:
+  - Digital currency
+  - framework
+  - changes
+  - FLASH strategy
+  - digiccy
+  - quant1098.com
+  - Okex
+  - AIOQuant
+description: 
+cover: https://s2.loli.net/2023/10/15/hqtSFLIyuJjHnfi.webp
 ---
 
-# FLASH策略的简易实盘实现，无需更改任何原有框架
+# Simple live implementation of the FLASH strategy without any changes to the original framework
 
-FLASH​策略的实盘实现（基于框架少量改动）
+Live implementation of the FLASH strategy (based on a small change in the framework)
 
-先贴signal代码：
+First post the signal code:
 
 ```python
 import os
@@ -18,23 +30,23 @@ from datetime import datetime
 
 def signal_adapt_bolling_with_flash(df_base, now_pos, avg_price,symbol_config,symbol ):
     holding_times_min=10
-    #本地文件名,初始化本地文件
+    # Local file name, initialize local file
     para=symbol_config[symbol]['para']
     id=para['id']
 
     file_name=os.path.join(father_path,'data',id+'.csv')
     ini_data(file_name,dic = {'pre_signal': 0, 'stop_lose_price': None,'holding_times':0,'stop_win_times':0,'stop_win_price':0})
 
-    # ===计算指标
+    # === Calculation of indicators
 
     n = para['n']
 
-    #固定止损参数
+    #Fixed Stop Loss Parameters
     df=df_base.copy()
     stop_loss_pct=para['stop_loss_pct']
 
     df['median'] = df['close'].rolling(n).mean()
-    # 计算上轨、下轨道
+    # Calculate upper and lower tracks
     df['std'] = df['close'].rolling(n).std(ddof=0)  # ddof代表标准差自由度
     df['zscore'] = abs(df['close'] - df['median']) / df['std']
     df['zsocre_abs'] = df['zscore'].rolling(n).max().shift()
@@ -45,35 +57,35 @@ def signal_adapt_bolling_with_flash(df_base, now_pos, avg_price,symbol_config,sy
 
 
 
-    #初始化信号
+    #Initialization signals
     signal=None
 
-    # 做空条件
+    # shorting conditions
     condition1=df.iloc[-1]['close']<df.iloc[-1]['lower']
     condition2=df.iloc[-2]['close']>df.iloc[-2]['lower']
     short_condition =condition1 & condition2
 
-    # 做多条件
+    # long position
     condition1=df.iloc[-1]['close']>df.iloc[-1]['upper']
     condition2=df.iloc[-2]['close']<df.iloc[-2]['upper']
     long_condition =condition1 & condition2
 
-    #平空条件
+    #level ground conditions
     condition1 = df.iloc[-1]['close'] > df.iloc[-1]['median']
     condition2 = df.iloc[-2]['close'] < df.iloc[-2]['median']
     close_short_condition = condition1 & condition2
 
-    #平多条件
+    # Pindo condition (math.)
     condition1 = df.iloc[-1]['close'] < df.iloc[-1]['median']
     condition2 = df.iloc[-2]['close'] > df.iloc[-2]['median']
     close_long_condition = condition1 & condition2
 
-    #检查本地文件与实际仓位是否有出入
-    # 从本地文件读取当前参数
+    #Check for discrepancies between local files and actual positions
+    # Read current parameters from local file
     info_dict = read_data(file_name)
 
     if now_pos != info_dict['pre_signal']:
-        #如果实际仓位为0
+        # If the actual position is 0
         if now_pos==0:
             info_dict={'pre_signal': 0, 'stop_lose_price': None,'holding_times':0,'stop_win_times':0,'stop_win_price':0}
 
@@ -89,8 +101,8 @@ def signal_adapt_bolling_with_flash(df_base, now_pos, avg_price,symbol_config,sy
                          'stop_win_times': 0, 'stop_win_price': 0}
         save_data(info_dict,file_name)
 
-    #开始下单逻辑
-    #做空
+    # Start ordering logic
+    # short
     if short_condition & (now_pos!=-1):
         signal = -1
         stop_lose_price=df.iloc[-1]['close'] * (1 + stop_loss_pct / 100)
@@ -98,7 +110,7 @@ def signal_adapt_bolling_with_flash(df_base, now_pos, avg_price,symbol_config,sy
                      'stop_lose_price': stop_lose_price,
                      'holding_times': 0, 'stop_win_times': 0, 'stop_win_price': 0}
         save_data(info_dict,file_name)
-    #做多
+    # long
     elif long_condition & (now_pos!=1):
         signal = 1
         stop_lose_price = df.iloc[-1]['close'] * (1 - stop_loss_pct / 100)
@@ -107,51 +119,51 @@ def signal_adapt_bolling_with_flash(df_base, now_pos, avg_price,symbol_config,sy
                      'holding_times': 0,
                      'stop_win_times': 0, 'stop_win_price': 0}
         save_data(info_dict,file_name)
-    # ===考察是否需要止盈止损
-    #当前持仓多头时
+    # ===Examine the need for a take profit and stop loss
+    #When currently long
     elif now_pos == 1:
-        # 由持仓次数，决定flash加速均线用哪个ma
+        # Determine which ma to use for flash accelerated averages by the number of positions held
         holding_times = info_dict['holding_times']
         ma_temp = max(n - holding_times, holding_times_min)
-        #更新info_dict的holding_times
+        # update info_dict的holding_times
         info_dict['holding_times'] = holding_times + 1
-        #计算止盈均线
+        # Calculating the Take Profit SMA
         df_temp=df['close'].rolling(ma_temp,min_periods=1).mean()
-        #提取均线最新值
+        # Extract the latest value of the SMA
         flash_stop_win=df_temp.iloc[-1]
-        #中线平多
+        # midline flat long (i.e. short term)
         if close_long_condition:
             signal = 0
             info_dict = {'pre_signal': 0, 'stop_lose_price': None, 'holding_times': 0, 'stop_win_times': 0,
                          'stop_win_price': 0}
 
-        #固定止损
-        elif df.iloc[-1]['close'] < (avg_price*(1-stop_loss_pct/100)): #固定止损
+        # fixed stop-loss (banking)
+        elif df.iloc[-1]['close'] < (avg_price*(1-stop_loss_pct/100)): # fixed stop-loss (banking)
             signal = 0
             info_dict = {'pre_signal': 0, 'stop_lose_price': None, 'holding_times': 0, 'stop_win_times': 0,
                          'stop_win_price': 0}
 
         #flash!!
-        #如果价格到达止盈点
+        #If the price reaches the take profit point
         elif df.iloc[-1]['close'] < flash_stop_win:
-            # 如果价格超过了上一次止盈点价格，说明上方可能还有空间，则重新开始flash加速，
+            # If the price exceeds the price of the last stop, indicating that there may be room above, the flash acceleration is restarted, the
             if df.iloc[-1]['close'] > info_dict['stop_win_price'] or info_dict['stop_win_times'] == 0:
                 info_dict['stop_win_price'] = df.iloc[-1]['close']
-                # 产生的止盈点次数+1
+                # The number of stops generated +1.
                 info_dict['stop_win_times'] = info_dict['stop_win_times'] + 1
-                # flash加速均线的持仓次数清零
+                # Flash accelerated averages are zeroed out the number of times a position is held
                 info_dict['holding_times'] = 0
 
             else:
-                #止盈出场
+                #exit with a profit
                 signal=0
                 info_dict = {'pre_signal': 0, 'stop_lose_price': None, 'holding_times': 0, 'stop_win_times': 0,
                              'stop_win_price': 0}
-        # 更新本地文件
+        # Updating local files
         save_data(info_dict,file_name)
-    # 当前持仓空头时
+    # When currently short
     elif now_pos == -1:
-        # 由持仓次数，决定flash加速均线用哪个ma
+        # Determine which ma to use for flash accelerated averages by the number of positions held
         holding_times = info_dict['holding_times']
         ma_temp = max(n - holding_times, holding_times_min)
         info_dict['holding_times'] = holding_times + 1
@@ -169,28 +181,28 @@ def signal_adapt_bolling_with_flash(df_base, now_pos, avg_price,symbol_config,sy
             info_dict = {'pre_signal': 0, 'stop_lose_price': None, 'holding_times': 0, 'stop_win_times': 0,
                          'stop_win_price': 0}
         #flash!!
-        # 如果价格达到止盈点
+        # If the price reaches the take profit point
         elif df.iloc[-1]['close'] > flash_stop_win:
-            # 如果价格跌破了上一次止盈点价格，说明下方可能还有空间，则重新开始flash加速，
+            # If the price falls below the price of the last stop, indicating that there may be room below, the flash acceleration is restarted, the
             if df.iloc[-1]['close'] < info_dict['stop_win_price'] or info_dict['stop_win_times'] == 0:
                 info_dict['stop_win_price'] = df.iloc[-1]['close']
-                # 产生的止盈点次数+1
+                # Number of stops generated +1
                 info_dict['stop_win_times'] = info_dict['stop_win_times'] + 1
-                # flash加速均线的持仓次数清零
+                # Flash accelerated averages are zeroed out the number of times a position is held
                 info_dict['holding_times'] = 0
 
             else:
                 signal = 0
                 info_dict = {'pre_signal': 0, 'stop_lose_price': None, 'holding_times': 0, 'stop_win_times': 0,
                              'stop_win_price': 0}
-        #更新本地文件
+        #Updating local files
         save_data(info_dict,file_name)
 
     return signal
 
 ```
 
-这是一个自适应布林加上flash的实盘代码。我和刑大的一个不同在于我讲para改成了dict，symbol_config变成了：
+This is a live code for an adaptive boolean plus flash. One difference between me and Interpol is that I changed para to dict and symbol_config to:
 
 ```python
 'eth-usdt': {'instrument_type': 'SWAP_USDT',
@@ -201,19 +213,19 @@ def signal_adapt_bolling_with_flash(df_base, now_pos, avg_price,symbol_config,sy
                  },
 ```
 
-这个样子，然后我在主程序给symbol_config的para里加了个id号，各位可以将​ ​id=para['id']
+This looks like this, and then I added an id number to symbol_config's para in the main program, so you guys can put id=para['id']
 
 ```
 ```
 
-这段代码改成自己喜欢的样子。。。随意就好。father_path是一个自动读取当前文件夹上一文件夹的路径，来自于：
+This code is changed to look the way you like it.... Feel free to do so. father_path is a path that automatically reads the path to the previous folder in the current folder from:
 
   
 
 ```python
-true_path=os.path.abspath(__file__)  # 绝对路径
-father_path=os.path.dirname(os.path.dirname(true_path)) #当前工作目录
-root_path=os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(true_path)))) #OKEX项目根目录
+true_path=os.path.abspath(__file__)  # absolute path
+father_path=os.path.dirname(os.path.dirname(true_path)) #Current working directory
+root_path=os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(true_path)))) #OKEX project root directory
 ```
 
 ‍
