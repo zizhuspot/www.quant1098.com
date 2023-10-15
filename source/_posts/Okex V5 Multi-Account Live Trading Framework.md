@@ -13,7 +13,7 @@ tags:
   - Okex
   - AIOQuant
 description: A month ago according to the big brother's V5 framework, in the live run through the single account, and experimented for a period of time, up to open to 3 py exchange will reject the request, so the integration of multi-account ideas and frameworks, mainly in order to satisfy like me, apply for the Okex API late, can only be used with the V5, and the need for multi-account smoothing the funds curve boss.
-cover: https://s2.loli.net/2023/10/15/EuRTH71P2hkAgrF.png
+cover: https://s2.loli.net/2023/10/15/hqtSFLIyuJjHnfi.webp
 ---
 
 ## Okex V5 Multi-Account Live Trading Framework
