@@ -1,6 +1,6 @@
 ---
 title: Timing Strategy Backtesting Visualization Panel
-date: 2023-10-15 16:07:00
+date: 2023-10-21 10:07:00
 categories:
   - quantitative trading
 tags:
