@@ -1,6 +1,6 @@
 ---
 title: Coin Money Flow - Centralized Exchanges from 0 to Generating csv Data
-date: 2023-10-15 16:07:00
+date: 2023-10-25 12:07:00
 categories:
   - quantitative trading
 tags:
