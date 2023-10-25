@@ -2,7 +2,7 @@
 title: Okex V5 Multi-Account Live Trading Framework
 date: 2023-10-15 16:07:00
 categories:
-  - quantitative trading
+  - Quantitative Trading
 tags:
   - Digital currency
   - Stock
