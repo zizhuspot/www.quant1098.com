@@ -2,7 +2,7 @@
 title: Simple live implementation of the FLASH strategy without any changes to the original framework
 date: 2023-10-15 17:07:00
 categories:
-  - quantitative trading
+  - Quantitative Trading
 tags:
   - Digital currency
   - framework
