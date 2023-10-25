@@ -2,7 +2,7 @@
 title: Automated Coin Selection Script Takes You to a Manual Live Coin Grid
 date: 2023-10-20 23:07:00
 categories:
-  - quantitative trading
+  - quantitative Trading
 tags:
   - Digital currency
   - Automated
