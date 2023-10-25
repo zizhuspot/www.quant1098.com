@@ -2,7 +2,7 @@
 title: Timing Strategy Backtesting Visualization Panel
 date: 2023-10-21 10:07:00
 categories:
-  - quantitative trading
+  - Quantitative Trading
 tags:
   - Digital currency
   - Stock
