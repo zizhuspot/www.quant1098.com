@@ -2,7 +2,7 @@
 title: 4 Years 1000x Multicurrency Rotation Containerized Real World Framework
 date: 2023-10-15 13:07:00
 categories:
-  - quantitative trading
+  - quantitative Trading
 tags:
   - Digital currency
   - container
