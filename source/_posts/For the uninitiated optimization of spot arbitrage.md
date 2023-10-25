@@ -2,7 +2,7 @@
 title: For the uninitiated optimization of spot arbitrage
 date: 2023-10-25 15:07:00
 categories:
-  - quantitative trading
+  - Quantitative Trading
 tags:
   - Digital currency
   - spot
