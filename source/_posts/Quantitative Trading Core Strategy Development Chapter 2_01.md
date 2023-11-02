@@ -11,7 +11,7 @@ tags:
   - randomness
   - quant1098.com
 description: Most people don't really understand the marvelous markets we are in. Starting with the efficient market hypothesis, this chapter explains the fundamental characteristics of the markets we live in, randomness, chaos, and time-varying nature, through the construction of stochastic portfolios, statistical tests of randomness, and the successes and failures of machine learning in the markets.
-cover: https://s2.loli.net/2023/11/02/4ngFWlmGuoeDpy8.png
+cover: https://s2.loli.net/2023/11/02/NTmzbJ9LgCBtQFs.webp
 ---
 
 ## Chapter 2: Basic Perceptions of the Market 
