@@ -13,7 +13,7 @@ tags:
   - Development
   - AIOQuant
 description: This chapter will introduce the trading view and even the world view that quantitative traders should have. In this chapter, the author verifies several important principles in the field of quantitative research by means of numerical simulation, Gambler's Bankruptcy Theory illustrates the importance of money management, the Law of Large Numbers is very important in strategy development and verification, the Central Limit Theorem is pivotal in the financial risk-control quota; and the Principle of Maximum Entropy constrains the world at a deeper level.
-cover: https://s2.loli.net/2023/10/15/hqtSFLIyuJjHnfi.webp
+cover: https://s2.loli.net/2023/11/02/4ngFWlmGuoeDpy8.png
 ---
 
 ## Chapter 1: Trading is a Game of Probabilities
