@@ -1,6 +1,6 @@
 ---
 title: Quantitative Trading Core Strategy Development Chapter 2_03
-date: 2023-11-03 07:07:00
+date: 2023-11-03 10:20:00
 categories:
   - Quantitative Trading
 tags:
