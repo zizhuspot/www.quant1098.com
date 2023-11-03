@@ -1,3 +1,21 @@
+---
+title: Quantitative Trading Core Strategy Development Chapter 2_05
+date: 2023-11-03 19:07:00
+categories:
+  - Quantitative Trading
+tags:
+  - Development 
+  - Strategy
+  - Quantitative tool
+  - Core
+  - randomness
+  - quant1098.com
+  - successes
+  - machine learning
+description: Most people don't really understand the marvelous markets we are in. Starting with the efficient market hypothesis, this chapter explains the fundamental characteristics of the markets we live in  randomness, chaos, and time-varying nature, through the construction of stochastic portfolios, statistical tests of randomness, and the successes and failures of machine learning in the markets.
+cover: https://s2.loli.net/2023/11/02/NTmzbJ9LgCBtQFs.webp
+---
+
 ## Chapter 2 Basic Perceptions about Markets Part V
 
 ##### Test 13 "Cumulative sum" test
