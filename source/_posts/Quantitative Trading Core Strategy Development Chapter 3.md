@@ -12,7 +12,7 @@ tags:
   - quant1098.com
   - successes
   - machine learning
-description:  In this chapter, we will introduce the programming languages that may be used in strategy development, including MATLAB, Python, R, Julia, etc. In this chapter, we will compare their features (including syntax, speed, richness of libraries, etc.). In this chapter, we will compare their features (syntax, speed, library richness, etc.), and finally, we will give an example of multi-language collaborative development.
+description: "To do a good job, you have to have the right tools." In this chapter, we will introduce the programming languages that may be used in strategy development, including MATLAB, Python, R, Julia, etc. In this chapter, we will compare their features (including syntax, speed, richness of libraries, etc.). In this chapter, we will compare their features (syntax, speed, library richness, etc.), and finally, we will give an example of multi-language collaborative development.
 cover: https://s2.loli.net/2023/11/02/NTmzbJ9LgCBtQFs.webp
 ---
 ## Chapter 3 Programming Language Selection
@@ -118,7 +118,7 @@ Therefore, in terms of library diversity, Julia is the worst, followed by Python
 
 ### 3.7 Ease of use 
 
-When it comes to ease of use, MATLAB has a good Integrated Development Environment (IDE) with very good documentation support. r has come a long way, and `RStudio' is even more user-friendly than MATLAB's IDE. shiny allows interactive web applications to be built directly from r, providing an online-friendly representation of the data. r has good plotting capabilities, and MATLAB is not far behind. R has good plotting capabilities, and MATLAB is not far behind: the Anaconda release of Python comes bundled with the friendly Spyder IDE, and Python's plotting is done primarily with `Matplotlib`, which has a MATLAB-like interface; Juno for Julia is an IDE that integrates the Atom editor, and has a similar appearance and functionality to Spyder, `Plots', and `Plots'. Spyder, `Plots.jl` is used for plotting, but usually depends on packages from other languages.
+When it comes to ease of use, MATLAB has a good Integrated Development Environment (IDE) with very good documentation support. r has come a long way, and `RStudio`' is even more user-friendly than MATLAB's IDE. shiny allows interactive web applications to be built directly from r, providing an online-friendly representation of the data. r has good plotting capabilities, and MATLAB is not far behind. R has good plotting capabilities, and MATLAB is not far behind: the Anaconda release of Python comes bundled with the friendly Spyder IDE, and Python's plotting is done primarily `withMatplotlib`, which has a MATLAB-like interface; Juno for Julia is an IDE that integrates the Atom editor, and has a similar appearance and functionality to Spyder,Plots', and Plots'. Spyder,`Plots.jl` is used for plotting, but usually depends on packages from other languages.`
 
 Commonly used libraries in Julia still change from time to time, which leads to incomplete or missing documentation. In many cases, when converting code from R / MATLAB to Julia, we have to check the source code to find the required settings.
 
@@ -131,16 +131,16 @@ Of course, there is no need to stick to one language, but rather to use a combin
 ### 3.8 Example of collaborative multilingual development with applications
 
 Consider the following formula for asset allocation:
-$$
-X = [(∑)^{-1} \times μ]^{T} \times (∑)^{-1}
-$$
+
+![image-20231103223051799](https://s2.loli.net/2023/11/03/ndmeMLA9wxr3bvE.png)
+
+
+
 Style:
 
 - ∑ is the Cholesky decomposition of the asset covariance matrix; 
 
-- $$
-  μ_i = R_i - r_f  + \frac{1}{2} \times δ_i^{2}
-  $$
+- ![image-20231103223142379](https://s2.loli.net/2023/11/03/HWqiwToGpE9FSy3.png)
 
   
 
@@ -148,20 +148,10 @@ Style:
 
 When there are only two asset classes, this formula is not difficult to calculate:
 
-$$
-\left[
-    \begin{matrix} 
-    x_1 \\
-    x_2
-    \end{matrix}
-    \right] = \frac{1}{1 - ρ^{2}}
-    \left[ 
-    \begin{matrix} 
-    (λ_1  + 1/2σ_1 - ρ  \times λ_2 - 1/2 \times ρ \times σ_2)/σ_1\\
-    (λ_2  + 1/2σ_2 - ρ  \times λ_1 - 1/2 \times ρ \times σ_1)/σ_2
-    \end{matrix}
-    \right]
-$$
+![image-20231103223222739](https://s2.loli.net/2023/11/03/nAVZWGr87Rb1Nj4.png)
+
+
+
 However, in the case of four asset classes, this formula is very difficult to derive. Can we only expect MATLAB's numerical calculations to be accurate enough? Let's use Mathematica to derive the analytic solution.
 
 First, define the covariance matrix function:
