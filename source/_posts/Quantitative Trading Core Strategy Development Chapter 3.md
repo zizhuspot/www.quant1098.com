@@ -12,7 +12,7 @@ tags:
   - quant1098.com
   - successes
   - machine learning
-description: "To do a good job, you have to have the right tools." In this chapter, we will introduce the programming languages that may be used in strategy development, including MATLAB, Python, R, Julia, etc. In this chapter, we will compare their features (including syntax, speed, richness of libraries, etc.). In this chapter, we will compare their features (syntax, speed, library richness, etc.), and finally, we will give an example of multi-language collaborative development.
+description: In this chapter, we will introduce the programming languages that may be used in strategy development, including MATLAB, Python, R, Julia, etc. In this chapter, we will compare their features (including syntax, speed, richness of libraries, etc.). In this chapter, we will compare their features (syntax, speed, library richness, etc.), and finally, we will give an example of multi-language collaborative development.
 cover: https://s2.loli.net/2023/11/02/NTmzbJ9LgCBtQFs.webp
 ---
 ## Chapter 3 Programming Language Selection
